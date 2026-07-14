@@ -282,6 +282,7 @@
 .video-hero-section {
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -949,7 +950,10 @@
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .testimonial-card,
+  .testimonial-card {
+    flex: 0 0 calc(100vw - 48px);
+    padding: 28px 24px;
+  }
   .service-showcase-card {
     padding: 28px 24px;
   }
