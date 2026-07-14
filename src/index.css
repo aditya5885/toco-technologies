@@ -182,8 +182,8 @@ code {
   100% { transform: translate(-50%, -50%) translate(-60px, 60px) scale(1.1); }
 }
 
-/* Hide native cursor on desktop displays with mouse inputs */
-@media (hover: hover) and (pointer: fine) {
+/* Hide native cursor on desktop displays with mouse inputs (only when custom cursor is active, i.e., viewport > 768px) */
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
   html, body, a, button, input, select, textarea, .project-row, .social-icon-btn, .footer-marquee-link {
     cursor: none !important;
   }

@@ -61,7 +61,7 @@ export default function Header() {
         {/* Logo Section */}
         <a href="#home" className="logo-container" onClick={() => handleItemClick('Home')}>
           <img src="/logo.jpeg" alt="Toco Technologies Logo" className="header-logo" />
-          <span className="logo-text">Toco<span className="accent-text">Tech</span></span>
+          <span className="logo-text">Toco<span className="accent-text"> Technologies</span></span>
         </a>
 
         {/* Desktop Navigation Pill */}

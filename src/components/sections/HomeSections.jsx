@@ -735,7 +735,7 @@ export function TestimonialSection() {
     {
       logo: <GoogleLogoIcon />,
       brand: "Google",
-      quote: "TocoTech plugged straight into our pipeline — within weeks we had a steady stream of optimized web solutions that actually moved performance.",
+      quote: "Toco Technologies plugged straight into our pipeline — within weeks we had a steady stream of optimized web solutions that actually moved performance.",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=80",
       name: "Sarah Mitchell",
       role: "Head of Growth"
@@ -743,7 +743,7 @@ export function TestimonialSection() {
     {
       logo: <PinterestLogoIcon />,
       brand: "Pinterest",
-      quote: "What used to take a full quarter to test, TocoTech now delivers in days. The creative engineering and system stability alone paid for itself twice.",
+      quote: "What used to take a full quarter to test, Toco Technologies now delivers in days. The creative engineering and system stability alone paid for itself twice.",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&fit=crop&q=80",
       name: "Marcus Lee",
       role: "Performance Marketing Lead"
@@ -775,7 +775,7 @@ export function TestimonialSection() {
     {
       logo: <AirbnbLogoIcon />,
       brand: "Airbnb",
-      quote: "The motion choreography and GSAP transitions created by Toco Tech are Awwwards-grade. Users love the fluid experience.",
+      quote: "The motion choreography and GSAP transitions created by Toco Technologies are Awwwards-grade. Users love the fluid experience.",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&fit=crop&q=80",
       name: "Liam O'Connor",
       role: "Creative Director"
@@ -1277,7 +1277,7 @@ export function FaqSection() {
   const faqs = [
     {
       num: "01",
-      question: "What is TocoTech's core focus?",
+      question: "What is Toco Technologies' core focus?",
       answer: "We specialize in custom visual frontends (React/Next.js), high-performance database scaling (Node.js/Go), DevOps pipeline automation, and Awwwards-grade motion system design. We turn complex workflows into blazingly fast digital platforms."
     },
     {

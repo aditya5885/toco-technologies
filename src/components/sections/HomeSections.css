@@ -1596,14 +1596,23 @@
 /* Slide progress indicators for VideoHero */
 .hero-slide-indicators {
   position: absolute;
-  right: 50px;
+  right: 40px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   z-index: 10;
   align-items: center;
+  /* Premium glassmorphic background for guaranteed high contrast visibility */
+  background: rgba(10, 15, 30, 0.45);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  padding: 24px 16px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-indicator-btn {
@@ -1620,6 +1629,14 @@
 
 .hero-indicator-btn:hover {
   transform: scale(1.05);
+}
+
+.hero-indicator-btn:hover .hero-indicator-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-indicator-btn:hover .hero-indicator-track {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .hero-indicator-track {
@@ -1677,7 +1694,9 @@
     bottom: 30px;
     transform: translateX(-50%);
     flex-direction: row; /* Switch back to horizontal row on mobile */
-    gap: 12px;
+    gap: 16px;
+    padding: 12px 24px;
+    border-radius: 30px;
   }
   
   .hero-indicator-btn {

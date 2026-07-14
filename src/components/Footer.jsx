@@ -124,7 +124,7 @@ export default function Footer() {
         {/* Massive Screen-width Brand Wordmark */}
         <div className="madre-branding-wordmark">
           <span className="branding-orange">TOCO</span>
-          <span className="branding-coral">TECH</span>
+          <span className="branding-coral">TECHNOLOGIES</span>
         </div>
 
       </div>
