@@ -1,0 +1,258 @@
+/* Custom Burrito Madre style Footer Stylesheet */
+
+.madre-footer {
+  width: 100%;
+  background-color: #0b1522; /* Dark navy-slate */
+  border-top-left-radius: 48px;
+  border-top-right-radius: 48px;
+  padding: 100px 0 32px 0;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* Wavy abstract line overlay */
+.madre-footer-wavy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.madre-footer-wavy svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.madre-footer-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4-Column top grid */
+.madre-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.6fr 0.65fr 0.75fr;
+  gap: 48px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.madre-brand-column {
+  /* Left spacer column */
+  display: block;
+}
+
+.madre-links-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* Links */
+.madre-footer-link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease;
+  opacity: 0.95;
+}
+
+.madre-footer-link:hover {
+  opacity: 0.55;
+}
+
+/* Locations Badge */
+.madre-location-badge {
+  background-color: #ffffff;
+  color: #0b1522;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Right Info column */
+.madre-info-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* Social media */
+.madre-social-row {
+  display: flex;
+  gap: 16px;
+}
+
+.madre-social-btn {
+  color: #ffffff;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.madre-social-btn:hover {
+  opacity: 0.6;
+}
+
+.social-svg-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Copyright text */
+.madre-copyright-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Flags Row */
+.madre-flag-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.madre-flag-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.madre-flag-btn:hover {
+  transform: scale(1.08);
+}
+
+.flag-icon-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Giant bottom branding */
+.madre-branding-wordmark {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: 'Syne', sans-serif;
+  font-size: 11.2vw;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -6px;
+  margin-top: 80px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.branding-orange {
+  color: #2F9EE4; /* Sky blue */
+}
+
+.branding-coral {
+  color: #76C4F7; /* Light sky blue */
+}
+
+/* Checkmark Badge on Bottom Left */
+.madre-bottom-left-badge {
+  position: absolute;
+  bottom: 28px;
+  left: 36px;
+  width: 48px;
+  height: 48px;
+  background-color: #2F9EE4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  box-shadow: 0 4px 14px rgba(47, 158, 228, 0.35);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.madre-bottom-left-badge:hover {
+  transform: scale(1.08) rotate(5deg);
+}
+
+/* ==========================================
+   Responsive Constraints
+   ========================================== */
+@media (max-width: 1024px) {
+  .madre-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .madre-brand-column {
+    display: none;
+  }
+  .madre-branding-wordmark {
+    font-size: 13vw;
+    letter-spacing: -3px;
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .madre-footer {
+    padding: 60px 0 24px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+  }
+  .madre-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .madre-footer-container {
+    padding: 0 24px;
+  }
+  .madre-branding-wordmark {
+    font-size: 15vw;
+    letter-spacing: -2px;
+    margin-top: 48px;
+  }
+  .madre-bottom-left-badge {
+    bottom: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+  }
+  .madre-bottom-left-badge svg {
+    width: 20px;
+    height: 20px;
+  }
+}

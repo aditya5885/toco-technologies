@@ -1,0 +1,49 @@
+/* Custom Cursor Styles */
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999; /* Place above all layers */
+}
+
+/* Precision Inner Dot */
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent); /* Theme color variable */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Trailing Outer Ring */
+.custom-cursor-ring {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--accent);
+  box-sizing: border-box;
+  background-color: transparent;
+  /* Transition left/top coordinates with small ease to create a delayed lag effect */
+  transition: left 0.08s cubic-bezier(0.25, 1, 0.5, 1),
+              top 0.08s cubic-bezier(0.25, 1, 0.5, 1),
+              width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover swell state on interactive items */
+.custom-cursor-ring.hovered {
+  width: 72px;
+  height: 72px;
+  background-color: var(--accent-bg); /* Theme bg glow */
+  border-color: var(--accent);
+}
+
+/* Touchscreens override: hide custom cursor on mobile viewports */
+@media (max-width: 768px) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}
