@@ -1,0 +1,260 @@
+.radial-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 140px 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.radial-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.radial-header {
+  text-align: center;
+  margin-bottom: 70px;
+  max-width: 800px;
+}
+
+.radial-badge {
+  display: inline-block;
+  background-color: rgba(47, 158, 228, 0.08);
+  border: 1px solid rgba(47, 158, 228, 0.2);
+  color: #1b6eab;
+  padding: 6px 20px;
+  border-radius: 9999px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.radial-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #081420;
+  margin: 0;
+  letter-spacing: -1.5px;
+}
+
+/* Map area */
+.radial-map-viewport {
+  position: relative;
+  width: 650px;
+  height: 650px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.radial-orbit-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: orbit-rotate 40s linear infinite;
+  z-index: 2;
+}
+
+.radial-connectors-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  transform-origin: center;
+  animation: orbit-rotate 40s linear infinite;
+}
+
+/* Sync play state on hover across SVG paths and track */
+.radial-map-viewport:hover .radial-orbit-track,
+.radial-map-viewport:hover .radial-connectors-svg,
+.radial-map-viewport:hover .radial-outer-node {
+  animation-play-state: paused;
+}
+
+.radial-curve-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+
+.radial-pulse-path {
+  stroke-linecap: round;
+  stroke-dasharray: 12, 160;
+  animation: line-pulse-flow 4s linear infinite;
+}
+
+@keyframes line-pulse-flow {
+  0% { stroke-dashoffset: 400; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Center node */
+.radial-center-node-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Ignore mouse interactions in center space */
+}
+
+.radial-center-node {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #2F9EE4;
+  box-shadow: 0 8px 32px rgba(47, 158, 228, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.radial-center-icon {
+  width: 38px;
+  height: 38px;
+  color: #2F9EE4;
+}
+
+.radial-center-glow {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(circle, rgba(186, 104, 200, 0.18) 0%, rgba(47, 158, 228, 0.08) 50%, transparent 70%);
+  filter: blur(10px);
+  z-index: 1;
+  border-radius: 50%;
+  animation: center-glow-pulse 4s infinite alternate ease-in-out;
+}
+
+@keyframes center-glow-pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Orbiting nodes */
+.radial-outer-node {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: orbit-rotate-reverse 40s linear infinite;
+}
+
+@keyframes orbit-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit-rotate-reverse {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* Node coordinates corresponding to SVG paths */
+.node-top { top: 10%; left: 50%; }
+.node-top-right { top: 30%; left: 82%; }
+.node-bottom-right { top: 70%; left: 82%; }
+.node-bottom { top: 90%; left: 50%; }
+.node-bottom-left { top: 70%; left: 18%; }
+.node-top-left { top: 30%; left: 18%; }
+
+.radial-node-content {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.radial-node-content span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.radial-outer-node:hover {
+  z-index: 8;
+}
+
+.radial-outer-node:hover .radial-node-content {
+  transform: scale(1.08);
+  border-color: #2F9EE4;
+  box-shadow: 0 12px 30px rgba(47, 158, 228, 0.08);
+}
+
+/* Responsive configurations */
+@media (max-width: 768px) {
+  .radial-map-viewport {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .radial-orbit-track {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    animation: none;
+  }
+  .radial-connectors-svg, .radial-center-node-wrapper {
+    display: none;
+  }
+  .radial-outer-node {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 320px;
+    animation: none;
+  }
+  .radial-node-content {
+    width: 100%;
+    height: 70px;
+    border-radius: 12px;
+    padding: 12px 24px;
+  }
+  .radial-title {
+    font-size: 32px;
+  }
+}

@@ -2,7 +2,7 @@
 
 .madre-footer {
   width: 100%;
-  background-color: #0b1522; /* Dark navy-slate */
+  background: linear-gradient(135deg, #091930 0%, #030811 100%);
   border-top-left-radius: 48px;
   border-top-right-radius: 48px;
   padding: 100px 0 32px 0;
@@ -169,7 +169,7 @@
   align-items: center;
   width: 100%;
   font-family: 'Syne', sans-serif;
-  font-size: 5.5vw;
+  font-size: clamp(24px, 5.2vw, 62px);
   font-weight: 800;
   line-height: 0.8;
   letter-spacing: -2px;
@@ -222,7 +222,7 @@
     display: none;
   }
   .madre-branding-wordmark {
-    font-size: 6.5vw;
+    font-size: clamp(20px, 6vw, 52px);
     letter-spacing: -2px;
     margin-top: 60px;
   }
@@ -245,7 +245,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    font-size: 8.5vw;
+    font-size: clamp(18px, 8vw, 44px);
     letter-spacing: -1.5px;
     margin-top: 48px;
     text-align: center;
@@ -259,5 +259,40 @@
   .madre-bottom-left-badge svg {
     width: 20px;
     height: 20px;
+  }
+
+}
+
+/* Scroll to Top Badge on Bottom Right */
+.madre-bottom-right-scroll-top {
+  position: absolute;
+  bottom: 28px;
+  right: 36px;
+  width: 48px;
+  height: 48px;
+  background-color: #2F9EE4;
+  border: none;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  box-shadow: 0 4px 14px rgba(47, 158, 228, 0.35);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.madre-bottom-right-scroll-top:hover {
+  transform: scale(1.08);
+  background-color: #1b6eab;
+}
+
+@media (max-width: 768px) {
+  .madre-bottom-right-scroll-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
   }
 }

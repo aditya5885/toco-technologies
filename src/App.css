@@ -216,3 +216,88 @@
     border-right-color: var(--border);
   }
 }
+
+/* Floating contact actions stack */
+.floating-contact-container {
+  position: fixed;
+  bottom: 96px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 9999;
+}
+
+.floating-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-btn {
+  background-color: #25D366;
+  animation: whatsapp-pulse 2.5s infinite;
+}
+
+.whatsapp-svg {
+  width: 26px;
+  height: 26px;
+}
+
+.phone-btn {
+  background-color: #2F9EE4;
+  animation: phone-pulse 2.5s infinite 1.25s; /* staggered start */
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes phone-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(47, 158, 228, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(47, 158, 228, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 158, 228, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-contact-container {
+    bottom: 80px;
+    right: 20px;
+    gap: 12px;
+  }
+  .floating-btn {
+    width: 46px;
+    height: 46px;
+  }
+  .whatsapp-svg, .floating-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+}

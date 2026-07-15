@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowUp } from 'lucide-react';
 import './Footer.css';
 
 // Custom inline SVG Instagram icon
@@ -133,6 +134,15 @@ export default function Footer() {
       <div className="madre-bottom-left-badge">
         <ShieldCheckIcon />
       </div>
+
+      {/* Scroll-to-top Button on Bottom Right */}
+      <button 
+        className="madre-bottom-right-scroll-top" 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp size={24} />
+      </button>
 
     </footer>
   );

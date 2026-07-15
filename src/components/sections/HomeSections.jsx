@@ -40,9 +40,9 @@ export function VideoHero() {
         ease: 'power2.in',
         onComplete: () => {
           if (currentSlide === 0) {
-            headline.innerHTML = 'Meet the next generation <br /> of web engineering.';
+            headline.innerHTML = 'Build Websites & Mobile Apps <br /> That Support Your Business';
           } else {
-            headline.innerHTML = 'Engineered for speed. <br /> Built for scale.';
+            headline.innerHTML = 'Custom Web Apps & Mobile Design <br /> Built Around Your Needs';
           }
           gsap.fromTo(headline,
             { opacity: 0, y: 35 },
@@ -74,8 +74,8 @@ export function VideoHero() {
       <div className="video-hero-overlay"></div>
       <div className="video-hero-content">
         <h1 className="video-hero-headline">
-          Meet the next generation <br />
-          of web engineering.
+          Build Websites & Mobile Apps <br />
+          That Support Your Business
         </h1>
       </div>
 
@@ -245,9 +245,9 @@ export function MixedMediaHero() {
       
       <div className="mixed-hero-container">
         <h2 className="mixed-display-text">
-          we <span className="sticker-group"><MiniDashboardSticker /><MiniCodeSticker /><MiniCursorSticker /></span> turn clean <br />
-          code into <InlineSwirlyArrow /> platforms <br />
-          users <InlineCollageSticker /> love.
+          we <span className="sticker-group"><MiniDashboardSticker /><MiniCodeSticker /><MiniCursorSticker /></span> build reliable <br />
+          websites and <InlineSwirlyArrow /> applications <br />
+          designed <InlineCollageSticker /> for you.
         </h2>
       </div>
     </section>
@@ -255,106 +255,67 @@ export function MixedMediaHero() {
 }
 
 
-// 1. Netflix Sticker
-function NetflixSticker() {
+// 1. Web Dev Sticker
+function WebDevSticker() {
   return (
     <svg viewBox="0 0 300 110" className="logo-sticker-svg">
       <filter id="sticker-shadow" x="-10%" y="-10%" width="130%" height="130%">
         <feDropShadow dx="5" dy="5" stdDeviation="0" floodColor="#1e293b" />
       </filter>
-      {/* Background White Sticker Contour */}
       <path d="M 15 28 Q 150 10 285 28 C 295 45 295 70 285 85 Q 150 103 15 85 C 5 70 5 45 15 28 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="7" filter="url(#sticker-shadow)" strokeLinejoin="round" />
-      {/* Netflix Red Curved Arch Text */}
-      <text x="50%" y="67" textAnchor="middle" fill="#e50914" fontSize="48" fontWeight="900" fontFamily="Impact, sans-serif" letterSpacing="1">NETFLIX</text>
+      <text x="50%" y="67" textAnchor="middle" fill="#081420" fontSize="44" fontWeight="900" fontFamily="'Outfit', 'Inter', sans-serif" letterSpacing="1">WEB DEV</text>
     </svg>
   );
 }
 
-// 2. ANWB Sticker
-function AnwbSticker() {
+// 2. Mobile Sticker
+function MobileSticker() {
   return (
     <svg viewBox="0 0 300 110" className="logo-sticker-svg">
       <filter id="sticker-shadow" x="-10%" y="-10%" width="130%" height="130%">
         <feDropShadow dx="5" dy="5" stdDeviation="0" floodColor="#1e293b" />
       </filter>
-      {/* White Sticker Contour */}
       <path d="M 40 20 L 260 20 C 285 20 285 90 260 90 L 40 90 C 15 90 15 20 40 20 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="7" filter="url(#sticker-shadow)" strokeLinejoin="round" />
-      
-      {/* ANWB emblem */}
-      <g transform="translate(42, 22) scale(0.65)">
-        <circle cx="50" cy="50" r="44" fill="#ffffff" stroke="#1e293b" strokeWidth="6" />
-        <circle cx="50" cy="50" r="34" fill="#ffcc00" stroke="#1e293b" strokeWidth="5" />
-        {/* Spokes */}
-        <path d="M 50 16 L 50 84 M 16 50 L 84 50 M 26 26 L 74 74 M 26 74 L 74 26" stroke="#1e293b" strokeWidth="5" strokeLinecap="round" />
-        <circle cx="50" cy="50" r="18" fill="#ffffff" stroke="#1e293b" strokeWidth="5" />
-        <circle cx="50" cy="50" r="6" fill="#1e293b" />
-      </g>
-      {/* anwb Text */}
-      <text x="122" y="68" fill="#1e293b" fontSize="46" fontWeight="900" fontStyle="italic" fontFamily="'Inter', sans-serif" letterSpacing="-2">anwb</text>
+      <text x="50%" y="68" textAnchor="middle" fill="#081420" fontSize="42" fontWeight="900" fontFamily="'Outfit', 'Inter', sans-serif" letterSpacing="0">MOBILE</text>
     </svg>
   );
 }
 
-// 3. KFC Sticker
-function KfcSticker() {
+// 3. UI/UX Sticker
+function UiUxSticker() {
   return (
     <svg viewBox="0 0 300 110" className="logo-sticker-svg">
       <filter id="sticker-shadow" x="-10%" y="-10%" width="130%" height="130%">
         <feDropShadow dx="5" dy="5" stdDeviation="0" floodColor="#1e293b" />
       </filter>
-      {/* Background White Sticker Contour */}
       <path d="M 45 15 L 255 15 C 280 15 280 95 255 95 L 45 95 C 20 95 20 15 45 15 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="7" filter="url(#sticker-shadow)" strokeLinejoin="round" />
-      
-      {/* Colonel Sanders simplified graphic face */}
-      <g transform="translate(45, 18) scale(0.72)">
-        {/* Glasses */}
-        <circle cx="20" cy="28" r="8" fill="none" stroke="#1e293b" strokeWidth="5" />
-        <circle cx="38" cy="28" r="8" fill="none" stroke="#1e293b" strokeWidth="5" />
-        <path d="M 28 28 L 30 28" stroke="#1e293b" strokeWidth="5" />
-        {/* Eyes */}
-        <circle cx="20" cy="28" r="2.5" fill="#1e293b" />
-        <circle cx="38" cy="28" r="2.5" fill="#1e293b" />
-        {/* Eyebrows */}
-        <path d="M 12 18 Q 20 16 26 21" fill="none" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
-        <path d="M 46 18 Q 38 16 32 21" fill="none" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
-        {/* Mustache & Beard */}
-        <path d="M 14 42 Q 29 49 44 42" fill="none" stroke="#1e293b" strokeWidth="5" strokeLinecap="round" />
-        <path d="M 22 47 L 22 55 L 36 55 L 36 47 Z" fill="#1e293b" stroke="#1e293b" />
-        {/* Bow tie */}
-        <path d="M 18 64 L 40 64 L 29 74 Z" fill="#1e293b" />
-      </g>
-      {/* KFC Text */}
-      <text x="135" y="70" fill="#e50914" fontSize="52" fontWeight="900" fontFamily="'Inter', sans-serif" letterSpacing="0">KFC</text>
+      <text x="50%" y="69" textAnchor="middle" fill="#081420" fontSize="46" fontWeight="900" fontFamily="'Outfit', 'Inter', sans-serif" letterSpacing="1">UI / UX</text>
     </svg>
   );
 }
 
-// 4. Swapfiets Sticker
-function SwapfietsSticker() {
+// 4. Web Apps Sticker
+function WebAppsSticker() {
   return (
     <svg viewBox="0 0 300 110" className="logo-sticker-svg">
       <filter id="sticker-shadow" x="-10%" y="-10%" width="130%" height="130%">
         <feDropShadow dx="5" dy="5" stdDeviation="0" floodColor="#1e293b" />
       </filter>
-      {/* Background White Sticker Contour */}
       <path d="M 35 22 Q 150 10 265 22 C 285 35 285 75 265 88 Q 150 100 35 88 C 15 75 15 35 35 22 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="7" filter="url(#sticker-shadow)" strokeLinejoin="round" />
-      {/* Swapfiets custom text */}
-      <text x="50%" y="67" textAnchor="middle" fill="#000000" fontSize="38" fontWeight="800" fontStyle="italic" fontFamily="'Yellowtail', 'Dancing Script', cursive">Swapfiets</text>
+      <text x="50%" y="67" textAnchor="middle" fill="#081420" fontSize="40" fontWeight="900" fontFamily="'Outfit', 'Inter', sans-serif" letterSpacing="0.5">WEB APPS</text>
     </svg>
   );
 }
 
-// 5. Ace & Tate Sticker
-function AceTateSticker() {
+// 5. Support Sticker
+function SupportSticker() {
   return (
     <svg viewBox="0 0 300 110" className="logo-sticker-svg">
       <filter id="sticker-shadow" x="-10%" y="-10%" width="130%" height="130%">
         <feDropShadow dx="5" dy="5" stdDeviation="0" floodColor="#1e293b" />
       </filter>
-      {/* Background White Sticker Contour */}
       <path d="M 30 20 L 270 20 C 290 20 290 90 270 90 L 30 90 C 10 90 10 20 30 20 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="7" filter="url(#sticker-shadow)" strokeLinejoin="round" />
-      {/* ace & tate Text */}
-      <text x="50%" y="68" textAnchor="middle" fill="#1e293b" fontSize="35" fontWeight="800" fontFamily="'Outfit', 'Inter', sans-serif" letterSpacing="-1">ace & tate</text>
+      <text x="50%" y="68" textAnchor="middle" fill="#081420" fontSize="42" fontWeight="900" fontFamily="'Outfit', 'Inter', sans-serif" letterSpacing="0">SUPPORT</text>
     </svg>
   );
 }
@@ -367,19 +328,19 @@ export function ClientShowcase() {
 
   // Lists of sticker cards (Sky Blue theme coordinated palette)
   const track1 = [
-    { component: <NetflixSticker />, bg: '#2F9EE4' },
-    { component: <AnwbSticker />, bg: '#1b6eab' },
-    { component: <KfcSticker />, bg: '#63bbf2' },
-    { component: <SwapfietsSticker />, bg: '#0e4a77' },
-    { component: <AceTateSticker />, bg: '#46abeb' },
+    { component: <WebDevSticker />, bg: '#2F9EE4' },
+    { component: <MobileSticker />, bg: '#1b6eab' },
+    { component: <UiUxSticker />, bg: '#63bbf2' },
+    { component: <WebAppsSticker />, bg: '#0e4a77' },
+    { component: <SupportSticker />, bg: '#46abeb' },
   ];
 
   const track2 = [
-    { component: <AnwbSticker />, bg: '#1b6eab' },
-    { component: <KfcSticker />, bg: '#63bbf2' },
-    { component: <SwapfietsSticker />, bg: '#0e4a77' },
-    { component: <AceTateSticker />, bg: '#46abeb' },
-    { component: <NetflixSticker />, bg: '#2F9EE4' },
+    { component: <MobileSticker />, bg: '#1b6eab' },
+    { component: <UiUxSticker />, bg: '#63bbf2' },
+    { component: <WebAppsSticker />, bg: '#0e4a77' },
+    { component: <SupportSticker />, bg: '#46abeb' },
+    { component: <WebDevSticker />, bg: '#2F9EE4' },
   ];
 
   const displayTrack1 = [...track1, ...track1, ...track1];
@@ -416,8 +377,8 @@ export function ClientShowcase() {
       const statsObj = { uptime: 0, scoping: 0, users: 0 };
       gsap.to(statsObj, {
         uptime: 99.9,
-        scoping: 48,
-        users: 50,
+        scoping: 24,
+        users: 100,
         duration: 2.5,
         ease: 'power3.out',
         scrollTrigger: {
@@ -427,7 +388,7 @@ export function ClientShowcase() {
         onUpdate: () => {
           if (uptimeRef.current) uptimeRef.current.innerText = statsObj.uptime.toFixed(1) + '%';
           if (scopingRef.current) scopingRef.current.innerText = Math.floor(statsObj.scoping) + 'h';
-          if (usersRef.current) usersRef.current.innerText = Math.floor(statsObj.users) + 'M+';
+          if (usersRef.current) usersRef.current.innerText = Math.floor(statsObj.users) + '%';
         }
       });
     }, 200);
@@ -449,29 +410,29 @@ export function ClientShowcase() {
             <svg viewBox="0 0 100 100" className="star-badge-svg">
                <path d="M 50 0 L 61 35 L 96 25 L 70 54 L 88 88 L 50 71 L 12 88 L 30 54 L 4 25 L 39 35 Z" fill="#2F9EE4" />
             </svg>
-            <span className="work-badge-text">work</span>
+            <span className="work-badge-text">focus</span>
           </div>
 
           <div className="showcase-left-content">
             <h2 className="showcase-left-title">
-              trusted by global<br />
-              industry leaders.
+              designed for<br />
+              reliability &amp; quality.
             </h2>
             <p className="showcase-left-desc">
-              We partner with ambitious startups and fast-growing teams to architect, engineer, and optimize high-performance web applications that drive real business growth.
+              We build digital products with a focus on clean code, intuitive design, and long-term reliability. We treat every project as a partnership to help your business establish a strong online presence.
             </p>
             <div className="showcase-stats-row">
               <div className="showcase-stat-col">
                 <span className="showcase-stat-number" ref={uptimeRef}>0.0%</span>
-                <span className="showcase-stat-label">platform uptime</span>
+                <span className="showcase-stat-label">service uptime</span>
               </div>
               <div className="showcase-stat-col">
                 <span className="showcase-stat-number" ref={scopingRef}>0h</span>
-                <span className="showcase-stat-label">scoping speed</span>
+                <span className="showcase-stat-label">support response</span>
               </div>
               <div className="showcase-stat-col">
                 <span className="showcase-stat-number" ref={usersRef}>0M+</span>
-                <span className="showcase-stat-label">active users</span>
+                <span className="showcase-stat-label">client satisfaction</span>
               </div>
             </div>
           </div>
@@ -514,20 +475,20 @@ export function CapabilityShowcase() {
   const containerRef = useRef(null);
   const capabilities = [
     {
-      title: "Consult & Scope",
-      desc: "We outline technical blueprints, database architectures, and API integrations in 48 hours, setting up clean pathways for development."
+      title: "1. Plan",
+      desc: "We discuss your project goals, define the features you need, and provide a clear timeline and budget estimation."
     },
     {
-      title: "Design & Prototype",
-      desc: "We craft custom UI/UX design systems and smooth micro-animations to give your platform a premium, Awwwards-grade experience."
+      title: "2. Design",
+      desc: "We create visual layouts of your website or app so you can see how it will look and function before we start coding."
     },
     {
-      title: "Engineer & Scale",
-      desc: "We program modular Next.js codebases, containerized microservices, and automated CI/CD pipelines optimized for peak traffic."
+      title: "3. Develop",
+      desc: "We build your website or app using reliable, secure code that works well on both desktop computers and mobile devices."
     },
     {
-      title: "Audit & Optimize",
-      desc: "We profile performance benchmarks, audit security vectors, and tune database queries to deliver 99.9% uptime and speed."
+      title: "4. Launch & Support",
+      desc: "We test the software, publish it online, and provide regular maintenance to ensure everything stays secure and up to date."
     }
   ];
 
@@ -601,11 +562,11 @@ export function CapabilityShowcase() {
         {/* Top Text Content */}
         <div className="capability-header">
           <h2 className="capability-main-title">
-            Code is complex.<br />
-            Experience should be <span className="highlight-text">effortless.</span>
+            Our development<br />
+            process is <span className="highlight-text">straightforward.</span>
           </h2>
           <p className="capability-subtitle">
-            Toco Technologies is engineered to transform complex technical systems and demanding user workflows into seamless, high-performance digital products.
+            We guide you through every step of building your website or application, from the initial plan to design, development, and long-term support.
           </p>
         </div>
 
@@ -735,7 +696,7 @@ export function TestimonialSection() {
     {
       logo: <GoogleLogoIcon />,
       brand: "Google",
-      quote: "Toco Technologies plugged straight into our pipeline — within weeks we had a steady stream of optimized web solutions that actually moved performance.",
+      quote: "The website developed by Toco Technologies loads quickly and is easy for our team to update. Their technical support is always responsive.",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=80",
       name: "Sarah Mitchell",
       role: "Head of Growth"
@@ -743,7 +704,7 @@ export function TestimonialSection() {
     {
       logo: <PinterestLogoIcon />,
       brand: "Pinterest",
-      quote: "What used to take a full quarter to test, Toco Technologies now delivers in days. The creative engineering and system stability alone paid for itself twice.",
+      quote: "They built our mobile application on time and within budget. The app is stable, and our users find it very easy to navigate.",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&fit=crop&q=80",
       name: "Marcus Lee",
       role: "Performance Marketing Lead"
@@ -751,7 +712,7 @@ export function TestimonialSection() {
     {
       logo: <TwitchLogoIcon />,
       brand: "Twitch",
-      quote: "Their team understood our user flow from day one. The custom modules felt native, scalable, and our page speeds and core web vitals showed it.",
+      quote: "Toco Technologies helped us redesign our customer portal. The interface is clean, simple, and has significantly improved our user satisfaction.",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&fit=crop&q=80",
       name: "Olivia Bennett",
       role: "Brand Marketing Manager"
@@ -759,7 +720,7 @@ export function TestimonialSection() {
     {
       logo: <SpotifyLogoIcon />,
       brand: "Spotify",
-      quote: "We needed a team that could bridge visual artistry and deep Node.js scaling. Toco Technologies delivered beautiful systems that cache instantly.",
+      quote: "We hired Toco Technologies to build a custom dashboard. They delivered a reliable solution and continue to provide great maintenance support.",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&fit=crop&q=80",
       name: "David Chen",
       role: "Senior Product Lead"
@@ -767,7 +728,7 @@ export function TestimonialSection() {
     {
       logo: <StripeLogoIcon />,
       brand: "Stripe",
-      quote: "Absolute masters of clean API contracts and frontend performance engineering. They scoped our payment module database in 48 hours.",
+      quote: "They integrated our payment systems and database workflows smoothly. The team communicates clearly and explains technical details simply.",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&fit=crop&q=80",
       name: "Elena Rostova",
       role: "Technical Lead"
@@ -775,7 +736,7 @@ export function TestimonialSection() {
     {
       logo: <AirbnbLogoIcon />,
       brand: "Airbnb",
-      quote: "The motion choreography and GSAP transitions created by Toco Technologies are Awwwards-grade. Users love the fluid experience.",
+      quote: "We needed a responsive website that worked well on mobile. They delivered a clean design that has helped us reach more customers.",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&fit=crop&q=80",
       name: "Liam O'Connor",
       role: "Creative Director"
@@ -783,7 +744,7 @@ export function TestimonialSection() {
     {
       logo: <SlackLogoIcon />,
       brand: "Slack",
-      quote: "Toco Technologies handles database scaling and query profiling with absolute precision. Our page loading speeds were cut by 40%.",
+      quote: "Their team built a custom directory tool for our employees. It works exactly as expected and has simplified our daily workflows.",
       avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&fit=crop&q=80",
       name: "Sophia Vance",
       role: "Product Marketing Manager"
@@ -791,7 +752,7 @@ export function TestimonialSection() {
     {
       logo: <ShopifyLogoIcon />,
       brand: "Shopify",
-      quote: "Their Devops engineering automated our complete CI/CD release cycles. We can deploy microservices at scale with zero downtime.",
+      quote: "Toco Technologies handles our monthly website maintenance. They keep our systems secure, up to date, and resolve any issues quickly.",
       avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&fit=crop&q=80",
       name: "Alex Dumont",
       role: "Founder & CTO"
@@ -880,8 +841,8 @@ export function TestimonialSection() {
         <div className="testimonials-header-row">
           <div className="testimonials-header">
             <h2 className="testimonials-title">
-              Loved by the best creative<br />
-              teams all over the world.
+              What our clients say<br />
+              about working with us.
             </h2>
           </div>
           <div className="testimonials-nav">
@@ -968,33 +929,33 @@ export function ServicesShowcase() {
   const services = [
     {
       num: "01",
-      title: "product scoping",
-      desc: "A deep dive into your brand, database layout, and system architecture to define technical scopes, cost estimation, and clear engineering roadmaps."
+      title: "website development",
+      desc: "We build custom websites that are secure, fast, and easy to use on both mobile and desktop screens."
     },
     {
       num: "02",
-      title: "creative strategy",
-      desc: "A strategic framework combining user interface wireframes, custom graphics, motion systems, and prototype testing centered around conversion goals."
+      title: "ui/ux design",
+      desc: "We design clean layouts and prototypes to make sure your website or application is easy for visitors to navigate."
     },
     {
       num: "03",
-      title: "ugc & frontend assets",
-      desc: "Pixel-perfect React and Next.js interfaces with rich micro-animations, accessible elements, and semantic HTML code optimized for PageSpeed score."
+      title: "web applications",
+      desc: "We build custom web software to help streamline your internal business processes and manage data safely."
     },
     {
       num: "04",
-      title: "cloud & microservices",
-      desc: "Modular microservices architecture, serverless integrations, database sharding, and real-time pub-sub channels designed to handle heavy scale."
+      title: "mobile app development",
+      desc: "We develop custom iOS and Android mobile apps designed to perform reliably and support your business goals."
     },
     {
       num: "05",
-      title: "automated pipelines",
-      desc: "Advanced Devops engineering featuring containerized environments (Docker), Kubernetes orchestration, automated testing suites, and CI/CD pipelines."
+      title: "api & database setups",
+      desc: "We connect your systems with secure databases and build stable API integrations to keep your data synced."
     },
     {
       num: "06",
-      title: "maintenance audit",
-      desc: "Continuous performance audits, penetration security testing, dependency updates, and SQL query profiling to maintain 99.9% platform uptime."
+      title: "maintenance & support",
+      desc: "We provide ongoing technical support, regular security patches, and updates to keep your software working correctly."
     }
   ];
 
@@ -1072,8 +1033,8 @@ export function ServicesShowcase() {
         {/* Header */}
         <div className="services-pin-header">
           <h2 className="services-pin-title">
-            Stuff that actually grows<br />
-            your digital products.
+            Our services are built<br />
+            to support your business goals.
           </h2>
         </div>
 
@@ -1107,7 +1068,7 @@ export function AboutUsReveal() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
 
-  const textContent = "we are a team of tech professionals with experience across multiple areas of software engineering, custom ui/ux architecture, and cloud operations, brought together by a shared vision to build blazingly fast digital platforms.";
+  const textContent = "we are a team of developers and designers focused on building reliable websites, custom web applications, and mobile apps. we work closely with business owners to deliver quality software that is easy to use, scale, and maintain.";
   const words = textContent.split(" ");
 
   useEffect(() => {
@@ -1128,7 +1089,7 @@ export function AboutUsReveal() {
       });
 
       tl.to(spans, {
-        color: "#ffffff",
+        color: "#081420",
         opacity: 1,
         stagger: 0.1,
         ease: "power2.out",
@@ -1167,24 +1128,29 @@ export function ExpertiseSection() {
   const containerRef = useRef(null);
   const expertiseItems = [
     {
-      title: "Web Engineering",
-      desc: "Modern, performance-optimized React and Next.js platforms built to load instantly and scale seamlessly."
+      title: "Website Development",
+      desc: "We build fast, secure, and responsive websites that help you connect with your customers and support your business goals.",
+      tags: ["Next.js", "React", "WordPress", "SEO"]
     },
     {
-      title: "UI/UX Architecture",
-      desc: "High-fidelity layouts, custom design systems, and fluid motion choreography designed to captivate visitors."
+      title: "UI/UX Design",
+      desc: "We design clean, user-friendly interfaces that make your website or application easy and intuitive for people to navigate.",
+      tags: ["Figma", "UI/UX", "Wireframes", "Layouts"]
     },
     {
-      title: "Cloud Orchestration",
-      desc: "Robust Docker/Kubernetes container deployments, automated CI/CD flows, and secure AWS infrastructure."
+      title: "Web Applications",
+      desc: "We develop custom web software to help you manage your internal operations, automate tasks, and serve your users.",
+      tags: ["React", "Node.js", "SaaS", "Databases"]
     },
     {
-      title: "System Audit",
-      desc: "Deep-dive database query profiling, Core Web Vitals optimization, and complete codebase security reviews."
+      title: "Mobile Apps",
+      desc: "We design and build custom mobile applications for iOS and Android platforms that are fast and reliable.",
+      tags: ["iOS", "Android", "React Native", "Apps"]
     },
     {
-      title: "API Systems",
-      desc: "Scalable Node.js, Go, or Python microservices coupled with clean REST/GraphQL schema contracts."
+      title: "Maintenance & Support",
+      desc: "We provide regular updates, security monitoring, and technical support to keep your digital products running smoothly.",
+      tags: ["Support", "Security", "Backups", "Updates"]
     }
   ];
 
@@ -1258,6 +1224,11 @@ export function ExpertiseSection() {
                 <div className="expertise-desc-col">
                   <p className="expertise-desc">{item.desc}</p>
                 </div>
+                <div className="expertise-tags-col">
+                  {item.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="expertise-tag-badge">{tag}</span>
+                  ))}
+                </div>
               </div>
               <div className="expertise-divider"></div>
             </React.Fragment>
@@ -1277,33 +1248,33 @@ export function FaqSection() {
   const faqs = [
     {
       num: "01",
-      question: "What is Toco Technologies' core focus?",
-      answer: "We specialize in custom visual frontends (React/Next.js), high-performance database scaling (Node.js/Go), DevOps pipeline automation, and Awwwards-grade motion system design. We turn complex workflows into blazingly fast digital platforms."
+      question: "What services does Toco Technologies offer?",
+      answer: "We specialize in custom website development, web application development, mobile app development (iOS & Android), UI/UX design, and ongoing website maintenance and support."
     },
     {
       num: "02",
-      question: "How fast can you scope a new software product?",
-      answer: "Our scoping process is engineered to be extremely fast. We typically deliver a complete production-ready technical blueprint, visual user experience prototype, database layout, and API contract within 48 hours."
+      question: "How do we start a new project?",
+      answer: "We begin with an initial consultation to discuss your business needs. After defining the project scope and requirements, we provide a clear project plan, estimated timeline, and cost estimate."
     },
     {
       num: "03",
-      question: "Do you offer continuous maintenance and security audits?",
-      answer: "Yes. We perform regular query profiling, security penetration audits, dependency upgrade reviews, and Core Web Vitals optimization checks to maintain 99.9% uptime and bulletproof security."
+      question: "Do you offer website maintenance and support?",
+      answer: "Yes. We offer monthly maintenance plans to monitor security, install updates, fix bugs, and ensure your website or application continues to run reliably."
     },
     {
       num: "04",
-      question: "Can your developers work alongside our internal engineering team?",
-      answer: "Absolutely. We integrate directly into your current communication and delivery pipelines (GitHub, Slack, Docker) to deliver modular code, database migrations, or visual assets that compile cleanly with your existing codebase."
+      question: "Can you collaborate with our in-house team?",
+      answer: "Yes. We can work alongside your existing team members, designers, or project managers to help build features or manage specific parts of your software project."
     },
     {
       num: "05",
-      question: "What specific tech stacks do you support?",
-      answer: "We are experts in React, Next.js, Node.js, Go, Python, Docker, Kubernetes, AWS, and modern motion libraries (GSAP, Framer Motion). All components we write score 95+ on Google PageSpeed tests."
+      question: "What technologies do you use?",
+      answer: "We choose the right technology based on your project goals. We commonly build websites and web apps using HTML, CSS, JavaScript, React, Next.js, and Node.js, and build mobile apps using React Native or native frameworks."
     },
     {
       num: "06",
-      question: "How do we request a technical scoping plan?",
-      answer: "Simply click the 'Request Scoping' button at the top of the page. We will collect your requirements, schedule a review call, and deliver your engineered architecture layout within 48 hours."
+      question: "How do we get a project estimate?",
+      answer: "You can click the 'Start Your Project' button and fill out our contact form. We will schedule a call to learn more about your business and provide a detailed estimate."
     }
   ];
 
@@ -1382,7 +1353,7 @@ export function FaqSection() {
       <div className="faq-section-container">
         
         {/* Title */}
-        <h2 className="faq-main-title">FAQ'S</h2>
+        <h2 className="faq-main-title">Frequently Asked Questions</h2>
 
         {/* Accordion List */}
         <div className="faq-accordion-container">

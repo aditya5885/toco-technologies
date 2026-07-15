@@ -366,7 +366,6 @@
    Capability Showcase Section (Joy Rush style)
    ========================================== */
 .capability-section {
-  width: 100%;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
@@ -375,7 +374,7 @@
   justify-content: center;
   padding: 100px 0;
   box-sizing: border-box;
-  background-color: #030712; /* Deep blueprint black */
+  background: #ffffff; /* White background */
 }
 
 .capability-section::before {
@@ -424,14 +423,13 @@
   font-size: 4.8vw;
   font-weight: 500;
   line-height: 1.15;
-  color: #ffffff;
+  color: #081420; /* Dark navy */
   margin: 0 0 24px 0;
   letter-spacing: -1.5px;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .capability-main-title .highlight-text {
-  background: linear-gradient(135deg, #a5f3fc 0%, #2F9EE4 100%);
+  background: linear-gradient(135deg, #1b6eab 0%, #2F9EE4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -442,12 +440,11 @@
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.75);
+  color: #4b5563; /* Slate grey */
   letter-spacing: 0.2px;
   line-height: 1.6;
   max-width: 720px;
   margin: 0 auto;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Connected Horizontal Timeline (No boxes) */
@@ -464,7 +461,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, rgba(47, 158, 228, 0.3) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(90deg, rgba(47, 158, 228, 0.2) 0%, rgba(15, 23, 42, 0.05) 100%);
   z-index: 1;
 }
 
@@ -499,8 +496,8 @@
 .capability-node {
   width: 12px;
   height: 12px;
-  background-color: #030712;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background-color: #ffffff;
+  border: 2px solid rgba(15, 23, 42, 0.2);
   border-radius: 50%;
   margin-bottom: 24px;
   transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -526,7 +523,7 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff;
+  color: #0f172a; /* Dark slate */
   margin: 0 0 12px 0;
   letter-spacing: -0.5px;
 }
@@ -535,7 +532,7 @@
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 14.5px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.65);
+  color: #4b5563; /* Slate grey */
   margin: 0;
   font-weight: 400;
 }
@@ -808,7 +805,7 @@
    ========================================== */
 .services-pin-container {
   width: 100%;
-  background-color: #0b121a; /* Dark slate-navy */
+  background: #f7f9fc; /* Light grey-blue background */
   position: relative;
   overflow: hidden;
 }
@@ -833,7 +830,7 @@
   font-size: 4.8vw;
   font-weight: 800;
   line-height: 1.1;
-  color: #ffffff;
+  color: #081420; /* Dark navy */
   margin: 0;
   letter-spacing: -2.5px;
 }
@@ -852,13 +849,13 @@
 
 .horizontal-service-card {
   width: 420px;
-  background-color: #16222f; /* Medium slate-navy */
+  background-color: #ffffff; /* White card */
   border-radius: 24px;
   padding: 50px 40px;
   box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid #e2e8f0;
   flex-shrink: 0;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .horizontal-service-card:hover {
@@ -869,15 +866,15 @@
 .service-number-badge {
   width: 42px;
   height: 42px;
-  background-color: #e8ff58; /* Neon yellow/lime */
+  background-color: #2F9EE4; /* Accent blue */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 17px;
   font-weight: 800;
-  color: #0b121a;
-  box-shadow: 0 0 16px rgba(232, 255, 88, 0.3);
+  color: #ffffff; /* White text */
+  box-shadow: 0 4px 12px rgba(47, 158, 228, 0.2);
   margin-bottom: 28px;
 }
 
@@ -885,7 +882,7 @@
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a; /* Dark slate */
   margin: 0 0 16px 0;
   text-transform: lowercase;
 }
@@ -894,7 +891,7 @@
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 14.5px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.65);
+  color: #4b5563; /* Slate grey */
   margin: 0;
   font-weight: 400;
 }
@@ -905,7 +902,7 @@
   left: 80px;
   right: 80px;
   height: 3px;
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(15, 23, 42, 0.08);
   border-radius: 9999px;
 }
 
@@ -1177,7 +1174,7 @@
    ========================================== */
 .about-reveal-section {
   width: 100%;
-  background-color: #000000;
+  background: #f4f1eb; /* Light cream backdrop */
   padding: 140px 0;
   box-sizing: border-box;
   position: relative;
@@ -1211,7 +1208,7 @@
   font-size: 4vw;
   font-weight: 700;
   line-height: 1.35;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(8, 20, 32, 0.15);
   margin: 0;
   letter-spacing: -2px;
   text-align: left;
@@ -1226,7 +1223,7 @@
 
 .reveal-word {
   display: inline-block;
-  color: rgba(255, 255, 255, 0.15);
+  color: rgba(8, 20, 32, 0.15); /* Inactive dark color */
   transition: color 0.15s ease;
 }
 
@@ -1235,7 +1232,7 @@
    ========================================== */
 .expertise-section {
   width: 100%;
-  background-color: #0b121a; /* Matching dark theme */
+  background: #ffffff; /* White background */
   padding: 140px 0;
   box-sizing: border-box;
 }
@@ -1254,7 +1251,7 @@
   font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
   font-size: 6.5vw;
   font-weight: 400;
-  color: #ffffff;
+  color: #081420; /* Dark navy */
   margin: 0 0 70px 0;
   letter-spacing: -2px;
   line-height: 1;
@@ -1263,7 +1260,7 @@
 .expertise-divider {
   width: 100%;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(15, 23, 42, 0.12); /* Faint dark border */
 }
 
 .expertise-rows-list {
@@ -1274,7 +1271,7 @@
 
 .expertise-row {
   display: grid;
-  grid-template-columns: 1.2fr 0.1fr 1.7fr;
+  grid-template-columns: 1fr 0.1fr 1.4fr 0.8fr;
   align-items: center;
   padding: 56px 0;
   box-sizing: border-box;
@@ -1285,16 +1282,17 @@
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 3.8vw;
   font-weight: 500;
-  color: #ffffff;
+  color: #081420; /* Dark navy */
   margin: 0;
   letter-spacing: -1.5px;
+  line-height: 1.15;
 }
 
 .expertise-slash {
   font-family: 'Outfit', sans-serif;
   font-size: 3.8vw;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.25);
+  color: #2F9EE4; /* Brand blue divider */
   display: inline-block;
 }
 
@@ -1302,7 +1300,7 @@
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 18px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.65);
+  color: #4b5563; /* Slate grey */
   margin: 0;
   max-width: 480px;
   font-weight: 400;
@@ -1315,7 +1313,7 @@
     margin-bottom: 50px;
   }
   .expertise-row {
-    grid-template-columns: 1.1fr 0.1fr 1.8fr;
+    grid-template-columns: 1fr 0.1fr 1.3fr 0.8fr;
     padding: 40px 0;
   }
   .expertise-title {
@@ -1357,6 +1355,38 @@
     font-size: 14px;
     max-width: 100%;
   }
+  .expertise-tags-col {
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+}
+
+/* Expertise Tags & Badges */
+.expertise-tags-col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.expertise-tag-badge {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1b6eab;
+  background-color: rgba(47, 158, 228, 0.08);
+  border: 1px solid rgba(47, 158, 228, 0.25);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.expertise-tag-badge:hover {
+  background-color: #2F9EE4;
+  color: #ffffff;
+  border-color: #2F9EE4;
 }
 
 /* Mobile overrides for About Us section */

@@ -85,7 +85,7 @@ export default function Header() {
         {/* CTA Button */}
         <div className="header-actions">
           <a href="#contact" className="cta-button" onClick={() => handleItemClick('')}>
-            <span>Request Scoping</span>
+            <span>Start Your Project</span>
             <ArrowUpRight size={16} className="cta-icon" />
           </a>
 
@@ -121,7 +121,7 @@ export default function Header() {
             onClick={() => handleItemClick('')}
           >
             <PhoneCall size={18} />
-            <span>Speak with our Experts</span>
+            <span>Contact Our Team</span>
           </a>
         </nav>
       </div>

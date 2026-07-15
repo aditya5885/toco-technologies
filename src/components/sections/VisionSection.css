@@ -1,0 +1,117 @@
+.vision-section {
+  width: 100%;
+  height: 65vh;
+  min-height: 500px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.vision-container {
+  max-width: 1000px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.vision-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(22px, 2.6vw, 36px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+/* Glass bubble backdrop styles */
+.vision-bubble-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vision-bubble {
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0%, rgba(243, 230, 250, 0.45) 50%, rgba(47, 158, 228, 0.25) 85%);
+  border: 1.5px solid rgba(186, 104, 200, 0.35);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 80px rgba(186, 104, 200, 0.25), 
+              0 10px 40px rgba(47, 158, 228, 0.2),
+              inset 0 0 35px rgba(255, 255, 255, 0.85);
+  position: relative;
+  overflow: hidden;
+  animation: float-bubble 8s ease-in-out infinite alternate, liquid-morph 12s ease-in-out infinite alternate;
+}
+
+.vision-bubble-glow {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  background: radial-gradient(circle, rgba(186, 104, 200, 0.22) 0%, rgba(47, 158, 228, 0.1) 50%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(40px);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse-glow 6s infinite alternate ease-in-out;
+}
+
+@keyframes float-bubble {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-16px) scale(1.05) rotate(5deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes liquid-morph {
+  0% { border-radius: 50% 50% 50% 50%; }
+  33% { border-radius: 46% 54% 48% 52%; }
+  66% { border-radius: 52% 48% 54% 46%; }
+  100% { border-radius: 48% 52% 46% 54%; }
+}
+
+@media (max-width: 768px) {
+  .vision-section {
+    height: 55vh;
+    min-height: 400px;
+  }
+  .vision-bubble-container {
+    width: 320px;
+    height: 320px;
+  }
+  .vision-bubble {
+    width: 260px;
+    height: 260px;
+  }
+}
