@@ -100,6 +100,7 @@
   font-size: clamp(32px, 4vw, 54px);
   font-weight: 800;
   line-height: 1.15;
+  color: #ffffff;
   margin: 0 0 28px 0;
   letter-spacing: -2px;
   max-width: 900px;

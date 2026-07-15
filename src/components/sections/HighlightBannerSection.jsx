@@ -67,9 +67,9 @@ export default function HighlightBannerSection() {
 
         {/* Heading */}
         <h2 className="hb-title hb-anim-item">
-          Maximize speed and performance with our custom 
+          Maximize speed and performance with our custom{" "}
           <span className="hb-highlight-wrapper">
-             software solutions.
+            software solutions.
             {/* SVG Swoosh/Underline vector */}
             <svg viewBox="0 0 300 20" className="hb-swoosh-svg">
               <path 
