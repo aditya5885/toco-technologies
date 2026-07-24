@@ -68,8 +68,8 @@ export default function WhyChooseUsSection() {
       title: "Custom Solutions",
       desc: "Each solution is personalized, ensuring that your business gets the exact tools it needs to succeed.",
       icon: <Sliders size={22} />,
-      theme: "purple-card",
-      dotTheme: "purple-dot",
+      theme: "sky-card",
+      dotTheme: "sky-dot",
     },
     {
       title: "Customer-Focused",
@@ -94,7 +94,9 @@ export default function WhyChooseUsSection() {
         {/* Header */}
         <div className="why-choose-header">
           <span className="why-choose-badge">Why Choose Us?</span>
-          <h2 className="why-choose-title">Empowering your business with excellence.</h2>
+          <h2 className="why-choose-title section-title section-title-light-bg">
+            Empowering your business with <span className="section-title-highlight">excellence.</span>
+          </h2>
         </div>
 
         {/* Timeline Grid */}
@@ -112,7 +114,7 @@ export default function WhyChooseUsSection() {
               <path 
                 d="M 50 0 C 50 150, 20 200, 20 350 C 20 500, 80 500, 80 650 C 80 750, 50 780, 50 800" 
                 fill="none" 
-                stroke="#2F9EE4" 
+                stroke="#1AA5F8" 
                 strokeWidth="4" 
                 strokeDasharray="12,12" 
                 className="why-choose-dashed-path"

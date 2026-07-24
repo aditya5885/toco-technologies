@@ -1,19 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Activity } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import './HighlightBannerSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HighlightBannerSection() {
   const sectionRef = useRef(null);
-  const pathRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade in texts
-      gsap.fromTo('.hb-anim-item',
+      gsap.fromTo('.hb-banner-content *',
         { opacity: 0, y: 30 },
         {
           opacity: 1,
@@ -23,21 +21,7 @@ export default function HighlightBannerSection() {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 75%',
-          }
-        }
-      );
-
-      // Draw hand-drawn stroke underline (length = 320)
-      gsap.fromTo(pathRef.current,
-        { strokeDashoffset: 320 },
-        {
-          strokeDashoffset: 0,
-          duration: 1.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 65%',
+            start: 'top 85%',
           }
         }
       );
@@ -47,59 +31,28 @@ export default function HighlightBannerSection() {
   }, []);
 
   return (
-    <section className="hb-section" ref={sectionRef}>
+    <section className="hb-section" ref={sectionRef} id="contact-banner">
+      <div className="hb-radial-glow"></div>
       
-      {/* Background drifting light shapes */}
-      <div className="hb-bg-glows">
-        <div className="hb-glow-1"></div>
-        <div className="hb-glow-2"></div>
-      </div>
-
-      <div className="hb-container">
-        
-        {/* Heartbeat progress badge */}
-        <div className="hb-badge-wrapper hb-anim-item">
-          <div className="hb-badge-icon-box">
-            <Activity size={16} className="hb-heartbeat-icon" />
-          </div>
-          <span>100% Client-Focused Execution</span>
-        </div>
-
-        {/* Heading */}
-        <h2 className="hb-title hb-anim-item">
-          Maximize speed and performance with our custom{" "}
-          <span className="hb-highlight-wrapper">
-            software solutions.
-            {/* SVG Swoosh/Underline vector */}
-            <svg viewBox="0 0 300 20" className="hb-swoosh-svg">
-              <path 
-                d="M 10 10 Q 150 18 290 10" 
-                fill="none" 
-                stroke="#ffffff" 
-                strokeWidth="4" 
-                strokeLinecap="round"
-                strokeDasharray="320"
-                strokeDashoffset="320"
-                ref={pathRef}
-              />
-            </svg>
-          </span>
+      <div className="hb-banner-content">
+        <h2 className="hb-banner-title">
+          Let's make your software vision a reality
         </h2>
-
-        {/* Subtitle */}
-        <p className="hb-subtitle hb-anim-item">
-          We engineer responsive websites, fluid web applications, and robust cloud architectures built to scale your business. With us, your project doesn't just launch — it succeeds.
+        
+        <p className="hb-banner-desc">
+          Trusted by forward-thinking brands to deliver high-impact custom web & mobile apps. Get in touch to schedule a discovery call.
         </p>
-
-        {/* Button */}
-        <div className="hb-btn-box hb-anim-item">
-          <a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" className="hb-btn">
-            Start Your Project
+        
+        <div className="hb-banner-actions">
+          <a href="#contact" className="hb-btn-dark">
+            <span>Talk to sales</span>
+            <ArrowRight size={16} />
+          </a>
+          <a href="#contact" className="hb-btn-white">
+            Request a demo
           </a>
         </div>
-
       </div>
-
     </section>
   );
 }

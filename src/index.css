@@ -1,20 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
 :root {
   --text: #475569;
   --text-h: #081420;
   --bg: #F8FCFF;
   --border: #e2e8f0;
   --code-bg: #f1f5f9;
-  --accent: #2F9EE4;
-  --accent-bg: rgba(47, 158, 228, 0.08);
-  --accent-border: rgba(47, 158, 228, 0.3);
-  --accent-gradient: linear-gradient(135deg, #2F9EE4 0%, #76C4F7 100%);
+  --accent: #1AA5F8;
+  --accent-bg: rgba(26, 165, 248, 0.08);
+  --accent-border: rgba(26, 165, 248, 0.3);
+  --accent-gradient: linear-gradient(135deg, #1AA5F8 0%, #7cd1ff 100%);
   --social-bg: rgba(241, 245, 249, 0.6);
   --shadow:
-    rgba(47, 158, 228, 0.06) 0 10px 15px -3px, rgba(47, 158, 228, 0.03) 0 4px 6px -2px;
+    rgba(26, 165, 248, 0.06) 0 10px 15px -3px, rgba(26, 165, 248, 0.03) 0 4px 6px -2px;
 
-  --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --heading: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: 'Aeonik', 'Arial', sans-serif;
+  --heading: 'Aeonik', 'Arial', sans-serif;
+  --mono: 'Space Mono', monospace;
 
   font: 18px/150% var(--sans);
   letter-spacing: 0.15px;
@@ -79,7 +81,7 @@ h1 {
   letter-spacing: -1.8px;
   margin: 32px 0;
   line-height: 1.15;
-  background: linear-gradient(135deg, #0f172a 0%, #aa3bff 100%);
+  background: linear-gradient(135deg, #081420 0%, #1AA5F8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   
@@ -142,7 +144,7 @@ code {
 .bg-glow-1 {
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, #aa3bff 0%, rgba(170, 59, 255, 0) 70%);
+  background: radial-gradient(circle, #1AA5F8 0%, rgba(26, 165, 248, 0) 70%);
   top: -10%;
   left: -10%;
   animation: floatGlow1 22s ease-in-out infinite alternate;
@@ -151,7 +153,7 @@ code {
 .bg-glow-2 {
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, #6366f1 0%, rgba(99, 102, 241, 0) 70%);
+  background: radial-gradient(circle, #1AA5F8 0%, rgba(26, 165, 248, 0) 70%);
   bottom: -10%;
   right: -10%;
   animation: floatGlow2 28s ease-in-out infinite alternate;
@@ -160,7 +162,7 @@ code {
 .bg-glow-3 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, #ec4899 0%, rgba(236, 72, 153, 0) 70%);
+  background: radial-gradient(circle, #7cd1ff 0%, rgba(124, 209, 255, 0) 70%);
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -188,4 +190,103 @@ code {
     cursor: none !important;
   }
 }
+
+/* Unified Global Page Hero & Section Title Standard (Matching 1st Image Reference) */
+.section-title,
+.page-hero-title,
+.contact-hero-title,
+.projects-hero-title,
+.premium-title,
+.about-hero-title,
+.careers-title,
+.services-hero-title {
+  font-family: 'Aeonik', 'Outfit', -apple-system, sans-serif !important;
+  font-size: clamp(34px, 4vw, 52px) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  color: #081420 !important;
+  letter-spacing: -1.5px !important;
+  margin: 0 0 20px 0 !important;
+  text-transform: none !important;
+}
+
+/* Base colors based on background theme */
+.section-title-light-bg {
+  color: #081420 !important;
+}
+
+.section-title-dark-bg {
+  color: #ffffff !important;
+}
+
+/* Highlighted (dual tone) portion matching 1st image reference */
+.section-title-highlight,
+.title-gradient-highlight,
+.title-gradient-beam,
+.features-theme-highlight,
+.projects-hero-gradient-text,
+.gradient-text-glow {
+  color: #1AA5F8 !important;
+  background: linear-gradient(135deg, #1AA5F8 0%, #0077FF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline !important;
+  font-weight: 800 !important;
+  animation: none !important;
+}
+
+/* Monospace Labels & Badges matching Lama Lama styling */
+.tech-badge,
+.why-choose-badge,
+.pillars-badge,
+.radial-badge,
+.hb-badge-wrapper span,
+.tech-chip,
+.expertise-tag-badge,
+.profile-role,
+.showcase-stat-label {
+  font-family: var(--mono) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Global Typography Override to Aeonik, Arial, sans-serif */
+body, input, button, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, div, li, option, label {
+  font-family: 'Aeonik', 'Arial', sans-serif !important;
+}
+
+/* Re-assert Monospace Font Family on Code / Tech Badge elements */
+code, pre, .mono, .counter, .tech-badge, .why-choose-badge, .pillars-badge, .radial-badge, .tech-chip, .hb-badge-wrapper span, .expertise-tag-badge, .profile-role, .showcase-stat-label {
+  font-family: var(--mono) !important;
+}
+
+/* Global Pixel-Perfect Pill Badge Tag */
+.pill-badge-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(26, 165, 248, 0.08) !important;
+  border: 1px solid rgba(26, 165, 248, 0.22) !important;
+  color: #1AA5F8 !important;
+  padding: 6px 16px !important;
+  border-radius: 100px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin-bottom: 24px !important;
+  box-sizing: border-box !important;
+}
+
+.badge-dot-blue {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background-color: #1AA5F8 !important;
+  box-shadow: 0 0 8px rgba(26, 165, 248, 0.6) !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
 

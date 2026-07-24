@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -18,11 +18,16 @@ import {
   FaqSection
 } from './components/sections/HomeSections';
 import TechStackSection from './components/sections/TechStackSection';
+import SlantedPressShowcase from './components/sections/SlantedPressShowcase';
 import WhyChooseUsSection from './components/sections/WhyChooseUsSection';
 import VisionSection from './components/sections/VisionSection';
 import RadialServicesSection from './components/sections/RadialServicesSection';
-import PillarsSection from './components/sections/PillarsSection';
 import HighlightBannerSection from './components/sections/HighlightBannerSection';
+import ContactPage from './components/pages/ContactPage';
+import CareersPage from './components/pages/CareersPage';
+import AboutPage from './components/pages/AboutPage';
+import ServicesPage from './components/pages/ServicesPage';
+import ProjectsPage from './components/pages/ProjectsPage';
 import './App.css';
 
 // Register GSAP plugins globally
@@ -30,6 +35,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+  const lenisRef = useRef(null);
+
+  // Monitor routing changes in URL hash
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      // Let the DOM render then refresh GSAP triggers
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     // Initialize Lenis smooth scroll
@@ -42,6 +63,8 @@ function App() {
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
     });
+
+    lenisRef.current = lenis;
 
     // Sync Lenis scrolls with ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
@@ -61,6 +84,72 @@ function App() {
     };
   }, []);
 
+  // Handle auto-scroll to hash on load after preloader completes (only for homepage anchors)
+  useEffect(() => {
+    if (!isLoading && window.location.hash && 
+        window.location.hash !== '#contact' && 
+        window.location.hash !== '#careers' &&
+        window.location.hash !== '#about' &&
+        window.location.hash !== '#services' &&
+        window.location.hash !== '#projects') {
+      const hash = window.location.hash;
+      const target = document.querySelector(hash);
+      if (target && lenisRef.current) {
+        setTimeout(() => {
+          lenisRef.current.scrollTo(target, { 
+            duration: 1.6,
+            offset: 0,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        }, 400);
+      }
+    }
+  }, [isLoading]);
+
+  // Global click listener to intercept all hash navigation clicks and trigger smooth scrolling
+  useEffect(() => {
+    const handleGlobalClick = (e) => {
+      const anchor = e.target.closest('a');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          // Allow subpage hash routing to function naturally without smooth scroll interception
+          const mainRoutes = ['#about', '#services', '#projects', '#careers', '#contact'];
+          if (mainRoutes.includes(href)) {
+            return;
+          }
+
+          const targetEl = document.querySelector(href);
+          if (targetEl) {
+            e.preventDefault();
+            if (lenisRef.current) {
+              lenisRef.current.scrollTo(targetEl, {
+                duration: 1.4,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+              });
+            }
+            window.history.pushState(null, '', href);
+          }
+        }
+      }
+    };
+
+    if (!isLoading) {
+      document.addEventListener('click', handleGlobalClick);
+    }
+    return () => {
+      document.removeEventListener('click', handleGlobalClick);
+    };
+  }, [isLoading]);
+
+  const isContactPage = currentHash === '#contact';
+  const isCareersPage = currentHash === '#careers';
+  const isAboutPage = currentHash === '#about';
+  const isServicesPage = currentHash === '#services';
+  const isProjectsPage = currentHash === '#projects';
+
+  const isFullPage = isContactPage || isCareersPage || isAboutPage || isServicesPage || isProjectsPage;
+
   return (
     <>
       {/* Preloader Screen */}
@@ -70,49 +159,69 @@ function App() {
       <CustomCursor />
       
       {/* Universal Floating Header */}
-      <Header />
+      <Header isContactPage={isFullPage} />
       
-      {/* Fullscreen Video Hero */}
-      <VideoHero />
-      
-      {/* Technology Stack / Engineering Excellence Section */}
-      <TechStackSection />
-      
-      {/* About Us Scroll Reveal Section */}
-      <AboutUsReveal />
-      
-      {/* Why Choose Us Timeline Section */}
-      <WhyChooseUsSection />
-      
-      {/* Expertise Section (Oak & Grid style) */}
-      <ExpertiseSection />
-      
-      {/* Interactive Radial Services Mind-Map Section */}
-      <RadialServicesSection />
-      
-      {/* Mixed-media Display Title Section */}
-      <MixedMediaHero />
-      
-      {/* Sky Blue Highlight Banner Section */}
-      <HighlightBannerSection />
-      
-      {/* Truus-inspired Client logo marquee section */}
-      <ClientShowcase />
-      
-      {/* Joy Rush style capabilities section */}
-      <CapabilityShowcase />
+      {isContactPage ? (
+        /* Separate Full Page Contact View */
+        <ContactPage />
+      ) : isCareersPage ? (
+        /* Separate Full Page Careers View */
+        <CareersPage />
+      ) : isAboutPage ? (
+        /* Separate Full Page About View */
+        <AboutPage />
+      ) : isServicesPage ? (
+        /* Separate Full Page Services View */
+        <ServicesPage />
+      ) : isProjectsPage ? (
+        /* Separate Full Page Projects View */
+        <ProjectsPage />
+      ) : (
+        /* Main Home Page Sections */
+        <>
+          {/* Fullscreen Video Hero */}
+          <VideoHero isLoading={isLoading} />
+          
+          {/* Technology Stack / Engineering Excellence Section */}
+          <TechStackSection />
+          
+          {/* About Us Scroll Reveal Section */}
+          <AboutUsReveal />
+          
+          {/* Why Choose Us Timeline Section */}
+          <WhyChooseUsSection />
+          
+          {/* Expertise Section (Oak & Grid style) */}
+          <ExpertiseSection />
+          
+          {/* Interactive Radial Services Mind-Map Section */}
+          <RadialServicesSection />
+          
+          {/* Mixed-media Display Title Section */}
+          <MixedMediaHero />
+          
+          {/* Truus-inspired Client logo marquee section */}
+          <ClientShowcase />
+          
+          {/* Slanted press/publication marquee section */}
+          <SlantedPressShowcase />
+          
+          {/* Joy Rush style capabilities section */}
+          <CapabilityShowcase />
 
-      {/* Centered Focus / Vision Statement Section */}
-      <VisionSection />
-      
-      {/* Testimonials Section */}
-      <TestimonialSection />
-      
-      {/* Pillars of Success Section (Office layout alternative) */}
-      <PillarsSection />
-      
-      {/* FAQ Accordion Section */}
-      <FaqSection />
+          {/* Centered Focus / Vision Statement Section */}
+          <VisionSection />
+          
+          {/* Testimonials Section */}
+          <TestimonialSection />
+          
+          {/* FAQ Accordion Section */}
+          <FaqSection />
+
+          {/* Sky Blue Contact Banner Section (Bottom CTA) */}
+          <HighlightBannerSection />
+        </>
+      )}
       
       {/* Footer */}
       <Footer />
@@ -143,3 +252,4 @@ function App() {
 }
 
 export default App;
+

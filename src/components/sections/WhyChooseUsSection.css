@@ -26,9 +26,9 @@
 
 .why-choose-badge {
   display: inline-block;
-  background-color: rgba(186, 104, 200, 0.08); /* Faint Purple */
-  border: 1px solid rgba(186, 104, 200, 0.2);
-  color: #ba68c8;
+  background-color: rgba(26, 165, 248, 0.08); /* Faint Sky Blue */
+  border: 1px solid rgba(26, 165, 248, 0.2);
+  color: #1AA5F8;
   padding: 6px 20px;
   border-radius: 9999px;
   font-family: 'Outfit', sans-serif;
@@ -148,7 +148,7 @@
 
 /* Card Colors coordination from theme */
 .yellow-card { background-color: #fffbf0; border-color: #ffeeb3; }
-.purple-card { background-color: #faf7fc; border-color: #eedff8; }
+.sky-card { background-color: #f0f9ff; border-color: #bfe5ff; }
 .pink-card { background-color: #fff0f3; border-color: #ffd2dc; }
 .blue-card { background-color: #f0f9ff; border-color: #bfe5ff; }
 
@@ -163,7 +163,7 @@
 }
 
 .yellow-card .why-choose-card-icon-box { background-color: #ffeeb3; color: #b28900; }
-.purple-card .why-choose-card-icon-box { background-color: #eedff8; color: #8e24aa; }
+.sky-card .why-choose-card-icon-box { background-color: #bfe5ff; color: #1AA5F8; }
 .pink-card .why-choose-card-icon-box { background-color: #ffd2dc; color: #d81b60; }
 .blue-card .why-choose-card-icon-box { background-color: #bfe5ff; color: #0277bd; }
 
@@ -206,8 +206,8 @@
 .yellow-dot { border: 2.5px solid #ffcc00; }
 .yellow-dot .node-inner-dot { background-color: #ffcc00; }
 
-.purple-dot { border: 2.5px solid #8e24aa; }
-.purple-dot .node-inner-dot { background-color: #8e24aa; }
+.sky-dot { border: 2.5px solid #1AA5F8; }
+.sky-dot .node-inner-dot { background-color: #1AA5F8; }
 
 .pink-dot { border: 2.5px solid #d81b60; }
 .pink-dot .node-inner-dot { background-color: #d81b60; }

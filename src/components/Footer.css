@@ -3,8 +3,6 @@
 .madre-footer {
   width: 100%;
   background: linear-gradient(135deg, #091930 0%, #030811 100%);
-  border-top-left-radius: 48px;
-  border-top-right-radius: 48px;
   padding: 100px 0 32px 0;
   position: relative;
   overflow: hidden;
@@ -51,8 +49,52 @@
 }
 
 .madre-brand-column {
-  /* Left spacer column */
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.footer-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: opacity 0.3s ease;
+}
+
+.footer-logo-container:hover {
+  opacity: 0.85;
+}
+
+.footer-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.footer-accent-text {
+  color: #1AA5F8;
+  font-weight: 600;
+}
+
+.footer-description {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  max-width: 320px;
 }
 
 .madre-links-column {
@@ -165,8 +207,9 @@
 /* Giant bottom branding (optimized font-size and spacing to prevent overflow of TOCO TECHNOLOGIES) */
 .madre-branding-wordmark {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 20px;
   width: 100%;
   font-family: 'Syne', sans-serif;
   font-size: clamp(24px, 5.2vw, 62px);
@@ -181,7 +224,7 @@
 }
 
 .branding-orange {
-  color: #2F9EE4; /* Sky blue */
+  color: #1AA5F8; /* Sky blue */
 }
 
 .branding-coral {
@@ -195,7 +238,7 @@
   left: 36px;
   width: 48px;
   height: 48px;
-  background-color: #2F9EE4;
+  background-color: #1AA5F8;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -219,7 +262,8 @@
     gap: 40px;
   }
   .madre-brand-column {
-    display: none;
+    grid-column: span 2;
+    margin-bottom: 20px;
   }
   .madre-branding-wordmark {
     font-size: clamp(20px, 6vw, 52px);
@@ -231,8 +275,6 @@
 @media (max-width: 768px) {
   .madre-footer {
     padding: 60px 0 24px;
-    border-top-left-radius: 32px;
-    border-top-right-radius: 32px;
   }
   .madre-footer-grid {
     grid-template-columns: 1fr;
@@ -270,7 +312,7 @@
   right: 36px;
   width: 48px;
   height: 48px;
-  background-color: #2F9EE4;
+  background-color: #1AA5F8;
   border: none;
   color: #ffffff;
   border-radius: 50%;

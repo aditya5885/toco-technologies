@@ -1,20 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './Preloader.css';
 
 export default function Preloader({ onComplete }) {
   const containerRef = useRef(null);
-  const ringRef = useRef(null);
-  const logoWrapperRef = useRef(null);
+  const logoRef = useRef(null);
+  const counterRef = useRef(null);
+  const progressLineRef = useRef(null);
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
-    // Lock body scroll
+    // Lock body scroll during preloader
     document.body.style.overflow = 'hidden';
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => {
-          // Unlock scroll and notify parent to unmount loader
           document.body.style.overflow = '';
           if (onComplete) onComplete();
         }
@@ -22,62 +23,52 @@ export default function Preloader({ onComplete }) {
 
       // Initial state
       gsap.set(containerRef.current, { opacity: 1 });
-      gsap.set(logoWrapperRef.current, { scale: 0.8, opacity: 0 });
-      gsap.set('.preloader-progress-ring', { opacity: 0, scale: 0.8 });
+      gsap.set('.preloader-item', { opacity: 0, y: 20 });
+      gsap.set(logoRef.current, { scale: 0.85, opacity: 0 });
 
-      // 1. Reveal logo and progress ring
-      tl.to([logoWrapperRef.current, '.preloader-progress-ring'], {
+      // 1. Reveal brand label, logo & counter
+      tl.to(logoRef.current, {
         opacity: 1,
         scale: 1,
         duration: 0.8,
+        ease: 'back.out(1.4)'
+      })
+      .to('.preloader-item', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
         stagger: 0.1,
-        ease: 'back.out(1.5)'
-      });
-
-      // 2. Pulse / breathing loop for logo (independent infinite tween during loading)
-      const pulse = gsap.to(logoWrapperRef.current, {
-        scale: 1.05,
-        duration: 1.2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-
-      // 3. Count 0 to 100 and update circle strokeDashoffset (circumference = 477.5)
-      const counterVal = { val: 0 };
-      const totalLength = 477.5;
-      
-      tl.to(counterVal, {
-        val: 100,
-        duration: 2.2,
-        ease: 'power1.inOut',
-        onUpdate: () => {
-          if (ringRef.current) {
-            const progressOffset = totalLength - (counterVal.val / 100) * totalLength;
-            ringRef.current.style.strokeDashoffset = progressOffset;
-          }
-        }
+        ease: 'power3.out'
       }, '-=0.4');
 
-      // 4. Logo zoom transition (kill the infinite pulse, zoom massively through logo + ring)
-      tl.add(() => {
-        pulse.kill();
-      });
+      // 2. Count 0 to 100%
+      const counterVal = { val: 0 };
+      tl.to(counterVal, {
+        val: 100,
+        duration: 1.8,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          const currentVal = Math.floor(counterVal.val);
+          setPercent(currentVal);
+          if (progressLineRef.current) {
+            progressLineRef.current.style.width = `${currentVal}%`;
+          }
+        }
+      }, '-=0.2');
 
-      // Scale logo and ring massively and fade out (optimized for speed and zero paint lag)
-      tl.to([logoWrapperRef.current, '.preloader-progress-ring'], {
-        scale: 6,
+      // 3. Smooth curtain exit reveal
+      tl.to('.preloader-brand, .preloader-counter-box, .preloader-logo-card', {
         opacity: 0,
-        duration: 0.4,
+        y: -30,
+        duration: 0.45,
         ease: 'power2.in'
       });
 
-      // Fade out screen overlay
       tl.to(containerRef.current, {
-        opacity: 0,
-        duration: 0.35,
-        ease: 'power2.out'
-      }, '-=0.3');
+        clipPath: 'inset(0% 0% 100% 0%)',
+        duration: 0.65,
+        ease: 'power4.inOut'
+      }, '-=0.15');
 
     }, containerRef);
 
@@ -86,48 +77,43 @@ export default function Preloader({ onComplete }) {
 
   return (
     <div className="preloader-overlay" ref={containerRef}>
-      <div className="preloader-content-wrapper">
-        <div className="preloader-logo-container">
-          
-          {/* Glowing Circular Progress SVG */}
-          <svg className="preloader-progress-ring" width="180" height="180">
-            <defs>
-              <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#2F9EE4" />
-                <stop offset="100%" stopColor="#ba68c8" />
-              </linearGradient>
-            </defs>
-            <circle 
-              className="preloader-ring-track"
-              cx="90" 
-              cy="90" 
-              r="76" 
-              stroke="rgba(255, 255, 255, 0.05)" 
-              strokeWidth="4" 
-              fill="transparent" 
-            />
-            <circle 
-              className="preloader-ring-indicator"
-              cx="90" 
-              cy="90" 
-              r="76" 
-              stroke="url(#ringGradient)" 
-              strokeWidth="4" 
-              fill="transparent" 
-              strokeDasharray="477.5"
-              strokeDashoffset="477.5"
-              ref={ringRef}
-            />
-          </svg>
+      {/* Background ambient lighting */}
+      <div className="preloader-bg-glow"></div>
+      <div className="preloader-bg-grid"></div>
 
-          {/* Centered logo */}
-          <div className="preloader-logo-wrapper" ref={logoWrapperRef}>
-            <img src="/logo.jpeg" alt="Toco Technologies Logo" className="preloader-logo-large" />
-            <div className="preloader-logo-glow"></div>
+      <div className="preloader-content">
+        
+        {/* Brand label */}
+        <div className="preloader-brand preloader-item">
+          <span className="preloader-badge-dot"></span>
+          <span>TOCO TECHNOLOGIES</span>
+        </div>
+
+        {/* Central Logo Card */}
+        <div className="preloader-logo-card" ref={logoRef}>
+          {/* Orbiting Spinner Ring */}
+          <div className="preloader-ring-spinner"></div>
+          
+          <div className="preloader-logo-disc">
+            <img src="/logo.jpeg" alt="Toco Technologies Logo" className="preloader-logo-img" />
+          </div>
+          <div className="preloader-logo-aura"></div>
+        </div>
+
+        {/* Numeric Progress Counter */}
+        <div className="preloader-counter-box preloader-item">
+          <div className="preloader-number-wrap">
+            <span className="preloader-percent-num">{percent < 10 ? `0${percent}` : percent}</span>
+            <span className="preloader-percent-symbol">%</span>
           </div>
           
+          <div className="preloader-progress-track">
+            <div className="preloader-progress-fill" ref={progressLineRef}></div>
+          </div>
         </div>
+
       </div>
     </div>
   );
 }
+

@@ -69,8 +69,16 @@ export default function Footer() {
         {/* Top Info Grid */}
         <div className="madre-footer-grid">
           
-          {/* Left Brand Area (Spacer with wave overlay) */}
-          <div className="madre-brand-column"></div>
+          {/* Left Brand Area (Logo & Description) */}
+          <div className="madre-brand-column">
+            <a href="#home" className="footer-logo-container">
+              <img src="/logo.jpeg" alt="Toco Technologies Logo" className="footer-logo" />
+              <span className="footer-logo-text">Toco<span className="footer-accent-text"> Technologies</span></span>
+            </a>
+            <p className="footer-description">
+              We design and build high-performance websites and custom mobile applications. Focused on reliability, clean code, and premium user experiences.
+            </p>
+          </div>
 
           {/* Link Column 1 */}
           <div className="madre-links-column">

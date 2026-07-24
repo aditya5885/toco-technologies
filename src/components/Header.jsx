@@ -10,7 +10,7 @@ const navItems = [
   { label: 'Careers', href: '#careers' },
 ];
 
-export default function Header() {
+export default function Header({ isContactPage }) {
   const [hoveredStyle, setHoveredStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [activeItem, setActiveItem] = useState('Home');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,6 +29,29 @@ export default function Header() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Sync active navigation link with URL hash changes
+  useEffect(() => {
+    const handleHashSync = () => {
+      const hash = window.location.hash;
+      if (hash === '#contact') {
+        setActiveItem('');
+      } else if (hash === '#careers') {
+        setActiveItem('Careers');
+      } else if (hash === '#home' || hash === '') {
+        setActiveItem('Home');
+      } else if (hash === '#services') {
+        setActiveItem('Services');
+      } else if (hash === '#about') {
+        setActiveItem('About Us');
+      } else if (hash === '#projects') {
+        setActiveItem('Projects');
+      }
+    };
+    handleHashSync();
+    window.addEventListener('hashchange', handleHashSync);
+    return () => window.removeEventListener('hashchange', handleHashSync);
   }, []);
 
   // Update hover state
@@ -56,7 +79,7 @@ export default function Header() {
   };
 
   return (
-    <header className={`site-header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`site-header ${isScrolled || isContactPage ? 'scrolled' : ''}`}>
       <div className="header-container">
         {/* Logo Section */}
         <a href="#home" className="logo-container" onClick={() => handleItemClick('Home')}>

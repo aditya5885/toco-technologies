@@ -1,33 +1,52 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight } from 'lucide-react';
 import './HomeSections.css';
 
-// 0. Video Hero Section (Zerocircle style)
-export function VideoHero() {
+// 0. Video Hero Section (Bottom-aligned, clean short title & single button)
+export function VideoHero({ isLoading = false }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const isFirstRender = useRef(true);
+  const hasAnimatedIn = useRef(false);
+  const isFirstSlideEffect = useRef(true);
 
+  // 1. Initial entrance animation (runs ONCE after preloader finishes)
   useEffect(() => {
-    // Initial entrance animation
-    gsap.fromTo('.video-hero-headline',
-      { opacity: 0, y: 45 },
-      { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.15 }
-    );
-  }, []);
+    if (isLoading || hasAnimatedIn.current) return;
+    hasAnimatedIn.current = true;
 
+    const tl = gsap.timeline({ delay: 0.15 });
+    tl.to('.video-hero-headline', {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 1.1,
+      ease: 'power3.out'
+    })
+    .to('.video-hero-actions', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: 'back.out(1.4)'
+    }, '-=0.7');
+  }, [isLoading]);
+
+  // 2. Slide rotation timer (only ticks after preloader is done)
   useEffect(() => {
-    // Swap slide every 7 seconds, resetting if currentSlide changes manually
+    if (isLoading) return;
+
     const timer = setTimeout(() => {
       setCurrentSlide(prev => (prev === 0 ? 1 : 0));
     }, 7000);
 
     return () => clearTimeout(timer);
-  }, [currentSlide]);
+  }, [currentSlide, isLoading]);
 
+  // 3. Slide transition animation on slide change
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (isFirstSlideEffect.current) {
+      isFirstSlideEffect.current = false;
       return;
     }
 
@@ -35,18 +54,19 @@ export function VideoHero() {
     if (headline) {
       gsap.to(headline, {
         opacity: 0,
-        y: -25,
-        duration: 0.5,
+        y: -18,
+        filter: 'blur(10px)',
+        duration: 0.4,
         ease: 'power2.in',
         onComplete: () => {
           if (currentSlide === 0) {
-            headline.innerHTML = 'Build Websites & Mobile Apps <br /> That Support Your Business';
+            headline.innerHTML = 'Innovative Web & App Development Services';
           } else {
-            headline.innerHTML = 'Custom Web Apps & Mobile Design <br /> Built Around Your Needs';
+            headline.innerHTML = 'From Concept to Launch, We Build It All';
           }
           gsap.fromTo(headline,
-            { opacity: 0, y: 35 },
-            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+            { opacity: 0, y: 25, filter: 'blur(10px)' },
+            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' }
           );
         }
       });
@@ -56,7 +76,7 @@ export function VideoHero() {
   return (
     <section className="video-hero-section" id="home">
       <video 
-        src="/vidoe.mp4" 
+        src="/hero.mp4" 
         autoPlay 
         loop 
         muted 
@@ -72,14 +92,23 @@ export function VideoHero() {
         className={`video-hero-bg ${currentSlide === 1 ? 'active' : ''}`}
       />
       <div className="video-hero-overlay"></div>
+      
       <div className="video-hero-content">
+        {/* Short Headline */}
         <h1 className="video-hero-headline">
-          Build Websites & Mobile Apps <br />
-          That Support Your Business
+          Innovative Web & App Development Services
         </h1>
+
+        {/* Single CTA Button */}
+        <div className="video-hero-actions">
+          <a href="#services" className="hero-btn hero-btn-primary">
+            <span>Explore Services</span>
+            <ArrowUpRight size={18} />
+          </a>
+        </div>
       </div>
 
-      {/* Slide Indicators (with progress bar) */}
+      {/* Slide Indicators */}
       <div className="hero-slide-indicators">
         {[0, 1].map((idx) => (
           <button
@@ -105,8 +134,8 @@ function MiniDashboardSticker() {
     <span className="inline-sticker sticker-dashboard">
       <svg viewBox="0 0 40 40" className="sticker-svg-icon" fill="none">
         <rect x="2" y="2" width="36" height="36" rx="10" fill="#1e293b" />
-        <rect x="7" y="9" width="11" height="9" rx="3" fill="#2F9EE4" opacity="0.8" />
-        <rect x="22" y="9" width="11" height="15" rx="3" fill="#2F9EE4" />
+        <rect x="7" y="9" width="11" height="9" rx="3" fill="#1AA5F8" opacity="0.8" />
+        <rect x="22" y="9" width="11" height="15" rx="3" fill="#1AA5F8" />
         <rect x="7" y="22" width="11" height="9" rx="3" fill="#64748b" />
       </svg>
     </span>
@@ -145,7 +174,7 @@ function InlineCollageSticker() {
     <span className="inline-sticker sticker-collage">
       <svg viewBox="0 0 110 40" className="sticker-svg-collage" fill="none">
         <rect x="6" y="8" width="22" height="38" rx="5" fill="#0f172a" stroke="#ffffff" strokeWidth="1.8" transform="rotate(-15 16 27)" />
-        <rect x="38" y="5" width="26" height="42" rx="5" fill="#2F9EE4" stroke="#ffffff" strokeWidth="1.8" />
+        <rect x="38" y="5" width="26" height="42" rx="5" fill="#1AA5F8" stroke="#ffffff" strokeWidth="1.8" />
         <rect x="72" y="10" width="22" height="38" rx="5" fill="#ff7a59" stroke="#ffffff" strokeWidth="1.8" transform="rotate(12 83 29)" />
         <circle cx="51" cy="10" r="1.8" fill="#ffffff" />
         <line x1="44" x2="58" y1="38" y2="38" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" />
@@ -328,7 +357,7 @@ export function ClientShowcase() {
 
   // Lists of sticker cards (Sky Blue theme coordinated palette)
   const track1 = [
-    { component: <WebDevSticker />, bg: '#2F9EE4' },
+    { component: <WebDevSticker />, bg: '#1AA5F8' },
     { component: <MobileSticker />, bg: '#1b6eab' },
     { component: <UiUxSticker />, bg: '#63bbf2' },
     { component: <WebAppsSticker />, bg: '#0e4a77' },
@@ -340,7 +369,7 @@ export function ClientShowcase() {
     { component: <UiUxSticker />, bg: '#63bbf2' },
     { component: <WebAppsSticker />, bg: '#0e4a77' },
     { component: <SupportSticker />, bg: '#46abeb' },
-    { component: <WebDevSticker />, bg: '#2F9EE4' },
+    { component: <WebDevSticker />, bg: '#1AA5F8' },
   ];
 
   const displayTrack1 = [...track1, ...track1, ...track1];
@@ -399,40 +428,51 @@ export function ClientShowcase() {
   }, []);
 
   return (
-    <section className="showcase-section" ref={containerRef}>
+    <section className="showcase-section" ref={containerRef} id="projects">
       <div className="showcase-grid">
         
         {/* Left Column (Static contents) */}
         <div className="showcase-left">
           
-          {/* Rotating badge in the corner */}
-          <div className="work-badge-wrapper">
-            <svg viewBox="0 0 100 100" className="star-badge-svg">
-               <path d="M 50 0 L 61 35 L 96 25 L 70 54 L 88 88 L 50 71 L 12 88 L 30 54 L 4 25 L 39 35 Z" fill="#2F9EE4" />
-            </svg>
-            <span className="work-badge-text">focus</span>
-          </div>
-
           <div className="showcase-left-content">
-            <h2 className="showcase-left-title">
-              designed for<br />
-              reliability &amp; quality.
+            <div className="showcase-pill-badge">
+              <span className="badge-pulse-dot"></span>
+              <span>ENGINEERING STANDARDS</span>
+            </div>
+
+            <h2 className="showcase-left-title section-title">
+              designed for <br />
+              <span className="title-gradient-highlight">reliability &amp; quality.</span>
             </h2>
+
             <p className="showcase-left-desc">
               We build digital products with a focus on clean code, intuitive design, and long-term reliability. We treat every project as a partnership to help your business establish a strong online presence.
             </p>
-            <div className="showcase-stats-row">
-              <div className="showcase-stat-col">
-                <span className="showcase-stat-number" ref={uptimeRef}>0.0%</span>
-                <span className="showcase-stat-label">service uptime</span>
+
+            <div className="showcase-stats-grid">
+              <div className="showcase-stat-card">
+                <div className="stat-card-header">
+                  <span className="stat-status-dot"></span>
+                  <span className="stat-tag">LIVE</span>
+                </div>
+                <span className="showcase-stat-number" ref={uptimeRef}>99.9%</span>
+                <span className="showcase-stat-label">SERVICE UPTIME</span>
               </div>
-              <div className="showcase-stat-col">
-                <span className="showcase-stat-number" ref={scopingRef}>0h</span>
-                <span className="showcase-stat-label">support response</span>
+
+              <div className="showcase-stat-card">
+                <div className="stat-card-header">
+                  <span className="stat-tag-highlight">FAST SLA</span>
+                </div>
+                <span className="showcase-stat-number" ref={scopingRef}>&lt; 1h</span>
+                <span className="showcase-stat-label">SUPPORT RESPONSE</span>
               </div>
-              <div className="showcase-stat-col">
-                <span className="showcase-stat-number" ref={usersRef}>0M+</span>
-                <span className="showcase-stat-label">client satisfaction</span>
+
+              <div className="showcase-stat-card">
+                <div className="stat-card-header">
+                  <span className="stat-stars">★★★★★</span>
+                </div>
+                <span className="showcase-stat-number" ref={usersRef}>100%</span>
+                <span className="showcase-stat-label">CLIENT SATISFACTION</span>
               </div>
             </div>
           </div>
@@ -561,9 +601,9 @@ export function CapabilityShowcase() {
         
         {/* Top Text Content */}
         <div className="capability-header">
-          <h2 className="capability-main-title">
+          <h2 className="capability-main-title section-title section-title-light-bg">
             Our development<br />
-            process is <span className="highlight-text">straightforward.</span>
+            process is <span className="section-title-highlight">straightforward.</span>
           </h2>
           <p className="capability-subtitle">
             We guide you through every step of building your website or application, from the initial plan to design, development, and long-term support.
@@ -663,7 +703,7 @@ function ShopifyLogoIcon() {
 
 function HeartIcon({ filled }) {
   return (
-    <svg viewBox="0 0 24 24" className="card-action-icon" width="18" height="18" fill={filled ? '#2F9EE4' : 'none'} stroke={filled ? '#2F9EE4' : 'currentColor'} strokeWidth="2">
+    <svg viewBox="0 0 24 24" className="card-action-icon" width="18" height="18" fill={filled ? '#1AA5F8' : 'none'} stroke={filled ? '#1AA5F8' : 'currentColor'} strokeWidth="2">
       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
     </svg>
   );
@@ -671,7 +711,7 @@ function HeartIcon({ filled }) {
 
 function BookmarkIcon({ filled }) {
   return (
-    <svg viewBox="0 0 24 24" className="card-action-icon" width="18" height="18" fill={filled ? '#2F9EE4' : 'none'} stroke={filled ? '#2F9EE4' : 'currentColor'} strokeWidth="2">
+    <svg viewBox="0 0 24 24" className="card-action-icon" width="18" height="18" fill={filled ? '#1AA5F8' : 'none'} stroke={filled ? '#1AA5F8' : 'currentColor'} strokeWidth="2">
       <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z" />
     </svg>
   );
@@ -689,103 +729,49 @@ function QuoteMarkIcon() {
 export function TestimonialSection() {
   const containerRef = useRef(null);
   const sliderRef = useRef(null);
-  const [likes, setLikes] = useState(Array(8).fill(false));
-  const [bookmarks, setBookmarks] = useState(Array(8).fill(false));
 
   const testimonials = [
     {
-      logo: <GoogleLogoIcon />,
-      brand: "Google",
       quote: "The website developed by Toco Technologies loads quickly and is easy for our team to update. Their technical support is always responsive.",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=80",
       name: "Sarah Mitchell",
-      role: "Head of Growth"
+      role: "Head of Growth, Google"
     },
     {
-      logo: <PinterestLogoIcon />,
-      brand: "Pinterest",
       quote: "They built our mobile application on time and within budget. The app is stable, and our users find it very easy to navigate.",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&fit=crop&q=80",
       name: "Marcus Lee",
-      role: "Performance Marketing Lead"
+      role: "Performance Marketing Lead, Pinterest"
     },
     {
-      logo: <TwitchLogoIcon />,
-      brand: "Twitch",
       quote: "Toco Technologies helped us redesign our customer portal. The interface is clean, simple, and has significantly improved our user satisfaction.",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&fit=crop&q=80",
       name: "Olivia Bennett",
-      role: "Brand Marketing Manager"
+      role: "Brand Marketing Manager, Twitch"
     },
     {
-      logo: <SpotifyLogoIcon />,
-      brand: "Spotify",
       quote: "We hired Toco Technologies to build a custom dashboard. They delivered a reliable solution and continue to provide great maintenance support.",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&fit=crop&q=80",
       name: "David Chen",
-      role: "Senior Product Lead"
+      role: "Senior Product Lead, Spotify"
     },
     {
-      logo: <StripeLogoIcon />,
-      brand: "Stripe",
       quote: "They integrated our payment systems and database workflows smoothly. The team communicates clearly and explains technical details simply.",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&fit=crop&q=80",
       name: "Elena Rostova",
-      role: "Technical Lead"
+      role: "Technical Lead, Stripe"
     },
     {
-      logo: <AirbnbLogoIcon />,
-      brand: "Airbnb",
       quote: "We needed a responsive website that worked well on mobile. They delivered a clean design that has helped us reach more customers.",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&fit=crop&q=80",
       name: "Liam O'Connor",
-      role: "Creative Director"
+      role: "Creative Director, Airbnb"
     },
     {
-      logo: <SlackLogoIcon />,
-      brand: "Slack",
       quote: "Their team built a custom directory tool for our employees. It works exactly as expected and has simplified our daily workflows.",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&fit=crop&q=80",
       name: "Sophia Vance",
-      role: "Product Marketing Manager"
+      role: "Product Marketing Manager, Slack"
     },
     {
-      logo: <ShopifyLogoIcon />,
-      brand: "Shopify",
       quote: "Toco Technologies handles our monthly website maintenance. They keep our systems secure, up to date, and resolve any issues quickly.",
-      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&fit=crop&q=80",
       name: "Alex Dumont",
-      role: "Founder & CTO"
+      role: "Founder & CTO, Shopify"
     }
   ];
-
-  const toggleLike = (idx) => {
-    setLikes(prev => {
-      const next = [...prev];
-      next[idx] = !next[idx];
-      return next;
-    });
-  };
-
-  const toggleBookmark = (idx) => {
-    setBookmarks(prev => {
-      const next = [...prev];
-      next[idx] = !next[idx];
-      return next;
-    });
-  };
-
-  const scrollPrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -418, behavior: 'smooth' });
-    }
-  };
-
-  const scrollNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 418, behavior: 'smooth' });
-    }
-  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -795,37 +781,41 @@ export function TestimonialSection() {
       if (!container) return;
 
       // Header reveal
-      const header = container.querySelector('.testimonials-header-row');
-      gsap.fromTo(header,
-        { opacity: 0, y: 35 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 80%',
+      const header = container.querySelector('.testimonials-header-centered');
+      if (header) {
+        gsap.fromTo(header,
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 80%',
+            }
           }
-        }
-      );
+        );
+      }
 
       // Cards staggered reveal on scroll
       const cards = container.querySelectorAll('.testimonial-card');
-      gsap.fromTo(cards,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 65%',
+      if (cards.length > 0) {
+        gsap.fromTo(cards,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 65%',
+            }
           }
-        }
-      );
+        );
+      }
     }, 200);
 
     return () => {
@@ -835,79 +825,34 @@ export function TestimonialSection() {
 
   return (
     <section className="testimonials-section" ref={containerRef}>
+      {/* Decorative Background Blur Glow */}
+      <div className="testimonials-bg-glow"></div>
+
       <div className="testimonials-container">
         
-        {/* Header Row with Navigation Buttons */}
-        <div className="testimonials-header-row">
-          <div className="testimonials-header">
-            <h2 className="testimonials-title">
-              What our clients say<br />
-              about working with us.
-            </h2>
-          </div>
-          <div className="testimonials-nav">
-            <button className="nav-arrow-btn" onClick={scrollPrev} aria-label="Previous Reviews">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-              </svg>
-            </button>
-            <button className="nav-arrow-btn" onClick={scrollNext} aria-label="Next Reviews">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          </div>
+        {/* Centered Header (Matching Mohsar Builders structure) */}
+        <div className="testimonials-header-centered">
+          <h2 className="testimonials-title section-title section-title-light-bg">
+            What Our Clients <span className="title-gradient-highlight">Say About Us</span>
+          </h2>
+          <p className="testimonials-subtitle">
+            Trusted by software teams and enterprise leaders alike.
+          </p>
         </div>
 
         {/* Testimonials Slider Track Container */}
         <div className="testimonials-slider-container">
           <div className="testimonials-slider-track" ref={sliderRef}>
-            {testimonials.map((item, idx) => (
+            {[...testimonials, ...testimonials, ...testimonials].map((item, idx) => (
               <div key={idx} className="testimonial-card">
                 
-                {/* Card Header: Brand */}
-                <div className="testimonial-card-brand">
-                  {item.logo}
-                  <span className="brand-name">{item.brand}</span>
-                </div>
-
-                {/* Quote Icon */}
-                <div className="testimonial-quote-wrapper">
-                  <QuoteMarkIcon />
-                </div>
-
                 {/* Quote Content */}
-                <p className="testimonial-quote-text">{item.quote}</p>
+                <p className="testimonial-quote-text">"{item.quote}"</p>
 
-                {/* Card Footer: Profile */}
-                <div className="testimonial-card-footer">
-                  <div className="testimonial-profile">
-                    <img src={item.avatar} alt={item.name} className="testimonial-avatar" />
-                    <div className="testimonial-info">
-                      <span className="profile-name">{item.name}</span>
-                      <span className="profile-role">{item.role}</span>
-                    </div>
-                  </div>
-
-                  {/* Utility Buttons */}
-                  <div className="testimonial-utilities">
-                    <button 
-                      className={`utility-btn ${likes[idx] ? 'liked' : ''}`} 
-                      onClick={() => toggleLike(idx)}
-                      aria-label="Like testimonial"
-                    >
-                      <HeartIcon filled={likes[idx]} />
-                    </button>
-                    <button 
-                      className={`utility-btn ${bookmarks[idx] ? 'bookmarked' : ''}`} 
-                      onClick={() => toggleBookmark(idx)}
-                      aria-label="Bookmark testimonial"
-                    >
-                      <BookmarkIcon filled={bookmarks[idx]} />
-                    </button>
-                  </div>
+                {/* Card Footer: Reviewer Info */}
+                <div className="testimonial-reviewer-info">
+                  <span className="reviewer-name">{item.name}</span>
+                  <span className="reviewer-role">{item.role}</span>
                 </div>
 
               </div>
@@ -929,33 +874,33 @@ export function ServicesShowcase() {
   const services = [
     {
       num: "01",
-      title: "website development",
-      desc: "We build custom websites that are secure, fast, and easy to use on both mobile and desktop screens."
+      title: "web application development",
+      desc: "We build custom web platforms and AI-enhanced applications that are secure, fast, and scalable for modern businesses."
     },
     {
       num: "02",
-      title: "ui/ux design",
-      desc: "We design clean layouts and prototypes to make sure your website or application is easy for visitors to navigate."
+      title: "mobile app development",
+      desc: "We engineer native iOS and Android mobile apps designed to perform reliably with fluid 120Hz micro-interactions."
     },
     {
       num: "03",
-      title: "web applications",
-      desc: "We build custom web software to help streamline your internal business processes and manage data safely."
+      title: "e-commerce solutions",
+      desc: "We create high-converting digital storefronts, custom checkout pipelines, and automated inventory systems."
     },
     {
       num: "04",
-      title: "mobile app development",
-      desc: "We develop custom iOS and Android mobile apps designed to perform reliably and support your business goals."
+      title: "erp solutions",
+      desc: "We build comprehensive Enterprise Resource Planning software to streamline operations, supply chain, and data reporting."
     },
     {
       num: "05",
-      title: "api & database setups",
-      desc: "We connect your systems with secure databases and build stable API integrations to keep your data synced."
+      title: "custom software development",
+      desc: "We engineer bespoke software architectures, automated workflow engines, and scalable backend APIs."
     },
     {
       num: "06",
-      title: "maintenance & support",
-      desc: "We provide ongoing technical support, regular security patches, and updates to keep your software working correctly."
+      title: "digital marketing",
+      desc: "We drive measurable growth through SEO optimization, targeted performance campaigns, and AI-assisted content strategy."
     }
   ];
 
@@ -1032,9 +977,9 @@ export function ServicesShowcase() {
         
         {/* Header */}
         <div className="services-pin-header">
-          <h2 className="services-pin-title">
+          <h2 className="services-pin-title section-title section-title-light-bg">
             Our services are built<br />
-            to support your business goals.
+            to support <span className="section-title-highlight">your business goals.</span>
           </h2>
         </div>
 
@@ -1102,7 +1047,7 @@ export function AboutUsReveal() {
   }, []);
 
   return (
-    <section className="about-reveal-section" ref={containerRef}>
+    <section className="about-reveal-section" ref={containerRef} id="about">
       <div className="about-reveal-container">
         
         {/* Pink capitalized sub-label */}
@@ -1128,29 +1073,34 @@ export function ExpertiseSection() {
   const containerRef = useRef(null);
   const expertiseItems = [
     {
-      title: "Website Development",
-      desc: "We build fast, secure, and responsive websites that help you connect with your customers and support your business goals.",
-      tags: ["Next.js", "React", "WordPress", "SEO"]
+      title: "Web Application Development",
+      desc: "We build custom web platforms and AI-enhanced applications that are secure, fast, and scalable for modern businesses.",
+      tags: ["React", "Next.js", "Node.js", "AI Integration"]
     },
     {
-      title: "UI/UX Design",
-      desc: "We design clean, user-friendly interfaces that make your website or application easy and intuitive for people to navigate.",
-      tags: ["Figma", "UI/UX", "Wireframes", "Layouts"]
+      title: "Mobile App Development",
+      desc: "We engineer native iOS and Android mobile applications built with Flutter and React Native for fluid 120Hz performance.",
+      tags: ["iOS", "Android", "Flutter", "React Native"]
     },
     {
-      title: "Web Applications",
-      desc: "We develop custom web software to help you manage your internal operations, automate tasks, and serve your users.",
-      tags: ["React", "Node.js", "SaaS", "Databases"]
+      title: "E-Commerce Solutions",
+      desc: "We create high-converting digital storefronts, custom checkout pipelines, and automated inventory systems.",
+      tags: ["Shopify Plus", "WooCommerce", "Custom Storefronts", "Stripe"]
     },
     {
-      title: "Mobile Apps",
-      desc: "We design and build custom mobile applications for iOS and Android platforms that are fast and reliable.",
-      tags: ["iOS", "Android", "React Native", "Apps"]
+      title: "ERP Solutions",
+      desc: "We build comprehensive Enterprise Resource Planning software to streamline operations, supply chain, and data reporting.",
+      tags: ["Enterprise ERP", "Inventory Management", "Workflow Automation", "Analytics"]
     },
     {
-      title: "Maintenance & Support",
-      desc: "We provide regular updates, security monitoring, and technical support to keep your digital products running smoothly.",
-      tags: ["Support", "Security", "Backups", "Updates"]
+      title: "Custom Software Development",
+      desc: "We engineer bespoke software architectures, automated workflow engines, and scalable backend APIs.",
+      tags: ["Bespoke Software", "SaaS", "Microservices", "REST APIs"]
+    },
+    {
+      title: "Digital Marketing",
+      desc: "We drive measurable growth through SEO optimization, targeted performance campaigns, and AI-assisted content strategy.",
+      tags: ["SEO Optimization", "Performance Ads", "Growth", "Social Media"]
     }
   ];
 
@@ -1201,11 +1151,13 @@ export function ExpertiseSection() {
   }, []);
 
   return (
-    <section className="expertise-section" ref={containerRef}>
+    <section className="expertise-section" ref={containerRef} id="services">
       <div className="expertise-container">
         
         {/* Large Serif Title */}
-        <h2 className="expertise-main-title">Expertise</h2>
+        <h2 className="expertise-main-title section-title section-title-light-bg">
+          Our <span className="section-title-highlight">Expertise</span>
+        </h2>
 
         {/* Divider above rows */}
         <div className="expertise-divider"></div>
@@ -1248,33 +1200,33 @@ export function FaqSection() {
   const faqs = [
     {
       num: "01",
-      question: "What services does Toco Technologies offer?",
-      answer: "We specialize in custom website development, web application development, mobile app development (iOS & Android), UI/UX design, and ongoing website maintenance and support."
+      question: "What services does Toco Technologies specialize in?",
+      answer: "We specialize in custom web development (React, Next.js), enterprise web applications, mobile app development (iOS & Android via React Native or native code), UI/UX design, and secure API/database integrations."
     },
     {
       num: "02",
-      question: "How do we start a new project?",
-      answer: "We begin with an initial consultation to discuss your business needs. After defining the project scope and requirements, we provide a clear project plan, estimated timeline, and cost estimate."
+      question: "What is your typical project development process?",
+      answer: "We follow a structured 4-phase process: (1) Discovery & Strategy, (2) UI/UX Design & Interactive Prototyping, (3) High-performance Development with clean code, and (4) Launching accompanied by robust post-launch support."
     },
     {
       num: "03",
-      question: "Do you offer website maintenance and support?",
-      answer: "Yes. We offer monthly maintenance plans to monitor security, install updates, fix bugs, and ensure your website or application continues to run reliably."
+      question: "Do you provide post-launch maintenance and support?",
+      answer: "Yes, we offer comprehensive monthly support and maintenance packages. This includes continuous security monitoring, regular dependency updates, bug resolution, and scaling infrastructure as your traffic grows."
     },
     {
       num: "04",
-      question: "Can you collaborate with our in-house team?",
-      answer: "Yes. We can work alongside your existing team members, designers, or project managers to help build features or manage specific parts of your software project."
+      question: "Can we sign a Non-Disclosure Agreement (NDA) before sharing details?",
+      answer: "Absolutely. We prioritize intellectual property protection and confidentiality. We are ready to sign an NDA before you share any proprietary designs, specs, or business logic."
     },
     {
       num: "05",
-      question: "What technologies do you use?",
-      answer: "We choose the right technology based on your project goals. We commonly build websites and web apps using HTML, CSS, JavaScript, React, Next.js, and Node.js, and build mobile apps using React Native or native frameworks."
+      question: "How long does it typically take to complete a project?",
+      answer: "Timelines depend entirely on the project scope. Custom marketing websites typically take 3 to 5 weeks, while complex database-driven web portals and mobile applications take 8 to 12 weeks. We build clear roadmaps for all milestones."
     },
     {
       num: "06",
-      question: "How do we get a project estimate?",
-      answer: "You can click the 'Start Your Project' button and fill out our contact form. We will schedule a call to learn more about your business and provide a detailed estimate."
+      question: "How do you estimate costs and project pricing?",
+      answer: "We calculate customized project proposals based on specific feature requirements, technical complexity, and target deadlines. Contact us for a free discovery consultation and custom quote."
     }
   ];
 
@@ -1353,7 +1305,9 @@ export function FaqSection() {
       <div className="faq-section-container">
         
         {/* Title */}
-        <h2 className="faq-main-title">Frequently Asked Questions</h2>
+        <h2 className="faq-main-title section-title section-title-light-bg">
+          Frequently Asked <span className="section-title-highlight">Questions</span>
+        </h2>
 
         {/* Accordion List */}
         <div className="faq-accordion-container">

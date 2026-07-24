@@ -12,7 +12,7 @@
 }
 
 .vision-container {
-  max-width: 1000px;
+  max-width: 1050px;
   width: 100%;
   padding: 0 40px;
   box-sizing: border-box;
@@ -21,24 +21,32 @@
   z-index: 10;
 }
 
+/* High-Contrast Word Reveal Styling */
 .vision-text {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(22px, 2.6vw, 36px);
-  font-weight: 500;
-  line-height: 1.5;
-  color: #0f172a;
-  letter-spacing: -0.5px;
+  font-family: 'Aeonik', 'Outfit', sans-serif !important;
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 750;
+  line-height: 1.55;
+  color: #081420;
+  letter-spacing: -0.8px;
   margin: 0;
 }
 
-/* Glass bubble backdrop styles */
-.vision-bubble-container {
+.vision-word {
+  display: inline-block;
+  opacity: 0.15;
+  transition: color 0.3s ease;
+  white-space: pre-wrap;
+}
+
+/* Toco Logo watermark backdrop styles */
+.vision-logo-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 480px;
-  height: 480px;
+  width: 440px;
+  height: 440px;
   z-index: 1;
   pointer-events: none;
   display: flex;
@@ -46,40 +54,50 @@
   justify-content: center;
 }
 
-.vision-bubble {
-  width: 440px;
-  height: 440px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0%, rgba(243, 230, 250, 0.45) 50%, rgba(47, 158, 228, 0.25) 85%);
-  border: 1.5px solid rgba(186, 104, 200, 0.35);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 30px 80px rgba(186, 104, 200, 0.25), 
-              0 10px 40px rgba(47, 158, 228, 0.2),
-              inset 0 0 35px rgba(255, 255, 255, 0.85);
-  position: relative;
+.vision-bg-logo-wrapper {
+  width: 320px;
+  height: 320px;
+  border-radius: 36px;
   overflow: hidden;
-  animation: float-bubble 8s ease-in-out infinite alternate, liquid-morph 12s ease-in-out infinite alternate;
+  border: 1.5px solid rgba(26, 165, 248, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 25px 60px rgba(26, 165, 248, 0.12), 
+              inset 0 0 25px rgba(255, 255, 255, 0.8);
+  opacity: 0.16; /* very subtle so text remains highly readable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float-logo 8s ease-in-out infinite alternate;
 }
 
-.vision-bubble-glow {
+.vision-bg-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.95;
+}
+
+.vision-logo-glow {
   position: absolute;
-  top: 5%;
-  left: 5%;
-  right: 5%;
-  bottom: 5%;
-  background: radial-gradient(circle, rgba(186, 104, 200, 0.22) 0%, rgba(47, 158, 228, 0.1) 50%, rgba(255, 255, 255, 0) 70%);
-  filter: blur(40px);
-  border-radius: 50%;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(26, 165, 248, 0.25) 0%, rgba(14, 165, 233, 0.08) 50%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(50px);
+  border-radius: 36px;
   z-index: -1;
   animation: pulse-glow 6s infinite alternate ease-in-out;
 }
 
-@keyframes float-bubble {
+@keyframes float-logo {
   0% {
     transform: translateY(0) scale(1) rotate(0deg);
   }
   100% {
-    transform: translateY(-16px) scale(1.05) rotate(5deg);
+    transform: translateY(-12px) scale(1.03) rotate(2deg);
   }
 }
 
@@ -90,15 +108,8 @@
   }
   100% {
     opacity: 1;
-    transform: scale(1.15);
+    transform: scale(1.08);
   }
-}
-
-@keyframes liquid-morph {
-  0% { border-radius: 50% 50% 50% 50%; }
-  33% { border-radius: 46% 54% 48% 52%; }
-  66% { border-radius: 52% 48% 54% 46%; }
-  100% { border-radius: 48% 52% 46% 54%; }
 }
 
 @media (max-width: 768px) {
@@ -106,12 +117,13 @@
     height: 55vh;
     min-height: 400px;
   }
-  .vision-bubble-container {
-    width: 320px;
-    height: 320px;
+  .vision-logo-container {
+    width: 280px;
+    height: 280px;
   }
-  .vision-bubble {
-    width: 260px;
-    height: 260px;
+  .vision-bg-logo-wrapper {
+    width: 220px;
+    height: 220px;
+    border-radius: 24px;
   }
 }

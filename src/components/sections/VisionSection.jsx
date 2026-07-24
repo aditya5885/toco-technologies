@@ -7,37 +7,43 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function VisionSection() {
   const sectionRef = useRef(null);
-  const bubbleRef = useRef(null);
-  const textRef = useRef(null);
+  const logoContainerRef = useRef(null);
+
+  const text = "We build powerful, user-focused digital solutions that inspire and perform. With creativity and precision, our team designs, develops, and delivers results that help brands grow smarter every day.";
+  
+  // Split text into words
+  const words = text.split(' ');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade and scale in the bubble
-      gsap.fromTo(bubbleRef.current,
-        { opacity: 0, scale: 0.8 },
+      // Stagger fade-in of words on scroll (Apple-style reveal)
+      gsap.fromTo('.vision-word',
+        { opacity: 0.15 },
         {
           opacity: 1,
-          scale: 1,
+          stagger: 0.04,
+          duration: 0.35,
+          ease: 'power1.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 75%',
+            end: 'bottom 45%',
+            scrub: 1.2,
+          }
+        }
+      );
+
+      // Logo backdrop subtle fade and scale on scroll
+      gsap.fromTo(logoContainerRef.current,
+        { opacity: 0, scale: 0.85 },
+        {
+          opacity: 1,
+          scale: 1.05,
           duration: 1.4,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 80%',
-          }
-        }
-      );
-
-      // Fade in text lines
-      gsap.fromTo(textRef.current,
-        { opacity: 0, y: 35 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
           }
         }
       );
@@ -49,18 +55,22 @@ export default function VisionSection() {
   return (
     <section className="vision-section" ref={sectionRef}>
       
-      {/* 3D Glass Bubble backdrop */}
-      <div className="vision-bubble-container" ref={bubbleRef}>
-        <div className="vision-bubble"></div>
-        <div className="vision-bubble-glow"></div>
+      {/* Toco Logo backdrop - Slowly floating with a soft glow, replacing the circle */}
+      <div className="vision-logo-container" ref={logoContainerRef}>
+        <div className="vision-bg-logo-wrapper">
+          <img src="/logo.jpeg" alt="Toco logo watermark" className="vision-bg-logo" />
+        </div>
+        <div className="vision-logo-glow"></div>
       </div>
 
-      {/* Focus Statement overlay */}
+      {/* Focus Statement overlay with word-by-word scroll reveal */}
       <div className="vision-container">
-        <p className="vision-text" ref={textRef}>
-          We build powerful, user-focused digital solutions that inspire and perform. 
-          With creativity and precision, our team designs, develops, and delivers results 
-          that help brands grow smarter every day.
+        <p className="vision-text">
+          {words.map((word, idx) => (
+            <span key={idx} className="vision-word">
+              {word}{' '}
+            </span>
+          ))}
         </p>
       </div>
 

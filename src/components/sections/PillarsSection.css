@@ -1,10 +1,36 @@
 .pillars-section {
   width: 100%;
-  background-color: #ffffff;
+  background: radial-gradient(circle at top, rgba(248, 250, 252, 0.6) 0%, rgba(241, 245, 249, 0.4) 100%);
   padding: 140px 0;
   box-sizing: border-box;
   overflow: hidden;
-  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.pillars-section::before,
+.pillars-section::after {
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pillars-section::before {
+  background: radial-gradient(circle, #f59e0b, transparent 70%);
+  top: 10%;
+  left: -10%;
+}
+
+.pillars-section::after {
+  background: radial-gradient(circle, #3b82f6, transparent 70%);
+  bottom: 10%;
+  right: -10%;
 }
 
 .pillars-container {
@@ -15,12 +41,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .pillars-header {
   text-align: center;
   margin-bottom: 80px;
   max-width: 800px;
+  position: relative;
+  z-index: 2;
 }
 
 .pillars-badge {
@@ -47,54 +77,266 @@
   letter-spacing: -1.5px;
 }
 
+.pillars-content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 20px;
+}
+
+/* Horizontal Timeline Connector Line */
+.pillars-connector-wrapper {
+  position: absolute;
+  top: 88px; /* 44px card padding + 24px half icon size + 20px alignment offset */
+  left: 12%;
+  right: 12%;
+  height: 4px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pillars-connector-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pillars-connector-svg path {
+  animation: pillars-dash-flow 25s infinite linear;
+}
+
+@keyframes pillars-dash-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
 .pillars-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   width: 100%;
-  max-width: 1100px;
   box-sizing: border-box;
-  margin-top: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .pillars-card {
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 28px;
   padding: 44px;
   box-sizing: border-box;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.02),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* Organic tilt angles matching offices design */
-.card-left-tilt { transform: rotate(-2deg); }
-.card-no-tilt { transform: rotate(0deg); }
-.card-right-tilt { transform: rotate(2deg); }
-
-.pillars-card:hover {
-  transform: scale(1.04) rotate(0deg);
-  border-color: #2F9EE4;
-  box-shadow: 0 20px 45px rgba(47, 158, 228, 0.06);
-  z-index: 10;
+.pillars-card-bg-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: background 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
+/* Card Numbering */
+.pillars-card-number {
+  position: absolute;
+  top: 36px;
+  right: 44px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(148, 163, 184, 0.09);
+  transition: color 0.4s ease, transform 0.4s ease;
+  user-select: none;
+  z-index: 1;
+}
+
+.pillars-card:hover .pillars-card-number {
+  transform: translateY(-3px) scale(1.08);
+}
+
+/* Watermark Text */
+.pillars-card-watermark {
+  position: absolute;
+  bottom: -15px;
+  right: -10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(148, 163, 184, 0.025);
+  pointer-events: none;
+  letter-spacing: -2px;
+  user-select: none;
+  z-index: 0;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.pillars-card:hover .pillars-card-watermark {
+  transform: scale(1.05) translate(-4px, -4px);
+}
+
+/* Theme Colors & Interactive Spotlights */
+/* Orange Theme (Strategy) */
+.card-orange:hover {
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 20px 45px rgba(245, 158, 11, 0.07),
+              0 0 0 1px rgba(245, 158, 11, 0.05);
+  transform: translateY(-8px);
+}
+
+.card-orange:hover .pillars-card-bg-glow {
+  background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.05), transparent 45%);
+}
+
+.card-orange:hover .pillars-card-number {
+  color: rgba(245, 158, 11, 0.16);
+}
+
+.card-orange:hover .pillars-card-watermark {
+  color: rgba(245, 158, 11, 0.04);
+}
+
+.card-orange .pillars-card-icon-box {
+  background-color: rgba(245, 158, 11, 0.07);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.12);
+}
+
+.card-orange .check-icon {
+  color: #f59e0b;
+}
+
+/* Blue Theme (Agile) */
+.card-blue:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 20px 45px rgba(59, 130, 246, 0.07),
+              0 0 0 1px rgba(59, 130, 246, 0.05);
+  transform: translateY(-8px);
+}
+
+.card-blue:hover .pillars-card-bg-glow {
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 45%);
+}
+
+.card-blue:hover .pillars-card-number {
+  color: rgba(59, 130, 246, 0.16);
+}
+
+.card-blue:hover .pillars-card-watermark {
+  color: rgba(59, 130, 246, 0.04);
+}
+
+.card-blue .pillars-card-icon-box {
+  background-color: rgba(59, 130, 246, 0.07);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.12);
+}
+
+.card-blue .check-icon {
+  color: #3b82f6;
+}
+
+/* Green Theme (Support) */
+.card-green:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 20px 45px rgba(16, 185, 129, 0.07),
+              0 0 0 1px rgba(16, 185, 129, 0.05);
+  transform: translateY(-8px);
+}
+
+.card-green:hover .pillars-card-bg-glow {
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.05), transparent 45%);
+}
+
+.card-green:hover .pillars-card-number {
+  color: rgba(16, 185, 129, 0.16);
+}
+
+.card-green:hover .pillars-card-watermark {
+  color: rgba(16, 185, 129, 0.04);
+}
+
+.card-green .pillars-card-icon-box {
+  background-color: rgba(16, 185, 129, 0.07);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.12);
+}
+
+.card-green .check-icon {
+  color: #10b981;
+}
+
+/* Icon Box */
 .pillars-card-icon-box {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.pillars-card-icon-box.orange-theme { background-color: rgba(209, 125, 0, 0.08); color: #d17d00; }
-.pillars-card-icon-box.blue-theme { background-color: rgba(47, 158, 228, 0.08); color: #2F9EE4; }
-.pillars-card-icon-box.green-theme { background-color: rgba(74, 160, 61, 0.08); color: #4AA03D; }
+.pillars-card:hover .pillars-card-icon-box {
+  transform: scale(1.1);
+}
+
+/* Custom Micro-Animations for Lucide Icons */
+.icon-pulse-hover {
+  transition: transform 0.3s ease;
+}
+
+.card-orange:hover .icon-pulse-hover {
+  animation: compass-spin 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes compass-spin {
+  0% { transform: rotate(0deg); }
+  60% { transform: rotate(385deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.card-blue:hover .icon-pulse-hover {
+  animation: terminal-shake 0.8s ease-in-out;
+}
+
+@keyframes terminal-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-3px); }
+  40%, 80% { transform: translateX(3px); }
+}
+
+.card-green:hover .icon-pulse-hover {
+  animation: shield-pulse 0.8s ease-in-out;
+}
+
+@keyframes shield-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+}
 
 .pillars-card-title {
   font-family: 'Outfit', sans-serif;
@@ -102,6 +344,8 @@
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 8px 0;
+  z-index: 2;
+  position: relative;
 }
 
 .pillars-card-subtitle {
@@ -109,11 +353,14 @@
   font-size: 11px;
   font-weight: 700;
   color: #94a3b8;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   margin-bottom: 32px;
   display: inline-block;
+  z-index: 2;
+  position: relative;
 }
 
+/* List Items styling */
 .pillars-card-list {
   list-style: none;
   padding: 0;
@@ -122,48 +369,86 @@
   flex-direction: column;
   gap: 16px;
   flex-grow: 1;
+  z-index: 2;
+  position: relative;
 }
 
 .pillars-card-list li {
   font-family: 'Outfit', sans-serif;
   font-size: 14.5px;
   line-height: 1.5;
-  color: #4b5563;
+  color: #475569;
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillars-card:hover .pillars-card-list li {
+  transform: translateX(4px);
 }
 
 .pillars-card-list li svg {
-  color: #2F9EE4;
   margin-top: 3px;
   flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.pillars-card:hover .pillars-card-list li svg {
+  transform: scale(1.22);
+}
+
+/* Footer card divider */
 .pillars-card-footer {
-  border-top: 1px dashed #e2e8f0;
+  border-top: 1px dashed rgba(226, 232, 240, 0.8);
   padding-top: 20px;
+  z-index: 2;
+  position: relative;
 }
 
 .pillars-card-footer span {
   font-family: 'Outfit', sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   color: #64748b;
   font-weight: 500;
+  letter-spacing: -0.2px;
 }
 
 /* Responsive configurations */
-@media (max-width: 900px) {
+@media (max-width: 992px) {
+  .pillars-section {
+    padding: 100px 0;
+  }
+  .pillars-connector-wrapper {
+    display: none; /* Hide connector when layout breaks horizontal flow */
+  }
   .pillars-grid {
     grid-template-columns: 1fr;
     gap: 30px;
-  }
-  .pillars-card {
-    transform: none !important;
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto;
   }
+  .pillars-card {
+    padding: 36px;
+  }
+  .pillars-card-number {
+    top: 28px;
+    right: 36px;
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pillars-container {
+    padding: 0 24px;
+  }
   .pillars-title {
-    font-size: 32px;
+    font-size: 34px;
+  }
+  .pillars-card {
+    padding: 30px;
+  }
+  .pillars-card-number {
+    font-size: 40px;
   }
 }
